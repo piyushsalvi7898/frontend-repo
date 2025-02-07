@@ -1,0 +1,131 @@
+.navbar {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    background-color: #333;
+    color: white;
+    padding: 10px; /* Adjusted padding for a smaller navbar */
+    font-size: 15px; /* Adjusted font size */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.navbar-title {
+    margin-right: 15px; /* Space between title and image */
+}
+
+.home-image2 {
+    height: 30px;
+    width: 100px;
+}
+
+
+
+.backgroundclronhover {
+    color: white; /* Default text color */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s, color 0.3s, border-radius 0.3s; /* Smooth transition for background, text color, and border radius */
+    padding: 0px 10px; /* Add padding for better appearance */
+    border-radius: 5px; /* Default border radius */
+}
+
+.backgroundclronhover:hover {
+    background-color: rgb(208, 223, 236); /* Background color on hover */
+    color: #333; /* Text color on hover */
+    border-radius: 10px; /* Increase border radius on hover for a more pronounced effect */
+}
+
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Added margin reset */
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.navbar ul li {
+    margin: 0 10px; /* Adjusted margin for smaller spacing */
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+/* Existing styles remain unchanged */
+.menu-toggle {
+    display: none; /* Hide the button by default */
+    background-color: #007BFF; /* Button background color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for size */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: bacground-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.menu-toggle:hover {
+    background-color: #0056b3; /* Darker background on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.menu-toggle:focus {
+    outline: none; /* Remove outline on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow effect */
+}
+
+/* Show the button on smaller screens */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Show the button */
+        margin-left: auto; /* Align to the right */
+    }
+
+    .navbar ul {
+        display: none; /* Hide the menu by default */
+        flex-direction: column; /* Stack links vertically */
+        width: 100%; /* Full width for the links */
+    }
+
+    .navbar ul.open {
+        display: flex; /* Show the menu when open */
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .navbar-title {
+        margin-bottom: 10px; /* Space below the title */
+    }
+
+    .navbar ul {
+        flex-direction: column; /* Stack links vertically */
+        width: 100%; /* Full width for the links */
+    }
+
+    .navbar ul li {
+        margin: 5px 0; /* Space between links */
+        width: 100%; /* Full width for each link */
+        text-align: center; /* Center text for links */
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 5px; /* Reduce padding on very small screens */
+    }
+
+    .navbar-title {
+        font-size: 14px; /* Smaller font size for the title */
+    }
+
+    .navbar ul li a {
+        font-size: 14px; /* Smaller font size for links */
+    }
+}

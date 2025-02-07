@@ -1,0 +1,260 @@
+/* Dashboard.css */
+
+.Dashboard-container {
+    padding: 20px; /* Padding around the container */
+    background-color: #f9f9f9; /* Light background color for the container */
+}
+
+.Dashboard-emoji {
+    font-size: 48px; /* Size of the emoji */
+    text-align: center; /* Center the emoji */
+    animation: bounce 1s infinite; /* Apply bounce animation */
+    margin-bottom: 20px; /* Space below the emoji */
+}
+
+/* Keyframes for bounce animation */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0); /* Original position */
+    }
+    40% {
+        transform: translateY(-20px); /* Move up */
+    }
+    60% {
+        transform: translateY(-10px); /* Move down */
+    }
+}
+
+.Dashboard-title {
+    font-size: 28px; /* Font size for the title */
+    color: #333; /* Dark text color */
+    margin-bottom: 20px; /* Space below the title */
+    text-align: center; /* Center the title */
+}
+
+.Dashboard-table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 20px; /* Space above the table */
+}
+
+.Dashboard-table th, .Dashboard-table td {
+    padding: 12px; /* Padding inside table cells */
+    text-align: left; /* Align text to the left */
+    border: 1px solid #ddd; /* Light border */
+}
+
+.Dashboard-table th {
+    background-color: #007bff; /* Header background color */
+    color: white; /* Header text color */
+    font-weight: bold; /* Bold text for headers */
+}
+
+.Dashboard-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray background for even rows */
+}
+
+.Dashboard-table tr:hover {
+    background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+.Dashboard-table td {
+    color: #555; /* Darker text color for table data */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .Dashboard-title {
+        font-size: 24px; /* Smaller font size for smaller screens */
+    }
+
+    .Dashboard-table th, .Dashboard-table td {
+        padding: 8px; /* Smaller padding for table cells */
+        font-size: 14px; /* Smaller font size for table text */
+    }
+
+    .Dashboard-emoji {
+        font-size: 36px; /* Smaller emoji size for smaller screens */
+    }
+}
+
+
+
+
+
+
+
+
+/* PasswordForm.css */
+
+.PasswordForm-description {
+    font-size: 16px; /* Font size for the description */
+    color: #666; /* Gray color for the text */
+    margin-bottom: 15px; /* Space below the description */
+    text-align: center; /* Center the text */
+}
+
+.PasswordForm-container {
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    /* border: #007bff 5px; */
+    align-items: center;
+    height: 80vh; /* Full viewport height */
+    background-color: #f0f2f5; /* Light background color */
+    padding: 0 20px; /* Add horizontal padding */
+}
+
+
+
+
+
+
+.PasswordForm-form-container {
+    border: 4px solid #0c692233;
+    /* Light shadow color */
+    box-shadow: 0px 0px 15px rgba(12, 169, 38, 0.4);
+    /* Darker shadow */
+    background-color: #ffffff; /* White background for the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding inside the form */
+    width: 100%; /* Full width */
+    max-width: 400px; /* Max width for larger screens */
+    text-align: center; /* Center text */
+}
+
+.PasswordForm-title {
+    font-size: 24px; /* Font size for the heading */
+    margin-bottom: 20px; /* Space below the heading */
+    color: #333; /* Dark text color */
+}
+
+.PasswordForm-input {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the input */
+    margin-bottom: 15px; /* Space below the input */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+}
+
+.PasswordForm-button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.PasswordForm-button:hover {
+    background-color: green; /* Darker shade on hover */
+}
+
+.PasswordForm-error {
+    color: red; /* Red color for error messages */
+    margin-top: 10px; /* Space above the error message */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .PasswordForm-title {
+        font-size: 20px; /* Smaller font size for smaller screens */
+    }
+
+    .PasswordForm-input,
+    .PasswordForm-button {
+        font-size: 14px; /* Smaller font size for inputs and buttons */
+    }
+}
+
+
+
+
+
+
+
+
+/* Loading and Error Styles */
+.loading, .error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px; /* Fixed width for the box */
+    padding: 20px; /* Padding inside the box */
+    margin: auto; /* Center the box horizontally */
+    position: absolute; /* Positioning for centering */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position to truly center */
+    font-family: 'Arial', sans-serif; /* Font style */
+    font-size: 24px; /* Font size */
+    color: #fff; /* Text color */
+    text-align: center;
+    background-color: #282c34; /* Background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: all 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Loading Animation */
+  .loading::before {
+    content: '';
+    position: absolute;
+    width: 30px; /* Size of the spinner */
+    height: 30px; /* Size of the spinner */
+    border: 5px solid rgba(255, 255, 255, 0.3); /* Spinner border */
+    border-top: 5px solid #61dafb; /* Spinner color */
+    border-radius: 50%; /* Circular spinner */
+    animation: spin 1s linear infinite; /* Spin animation */
+    top: 10px; /* Position the spinner above the text */
+  }
+  
+  /* Keyframes for spinner animation */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Error Styles */
+  .error {
+    background-color: #ff4d4d; /* Red background for error */
+    color: #fff; /* White text color */
+    border: 1px solid #ff0000; /* Red border */
+  }
+
+
+
+
+
+
+
+
+
+
+
+  .Dashboard-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the entire area */
+    z-index: -1; /* Places the video behind other content */
+}
+
+.Dashboard-container {
+    position: relative; /* Ensures the container is above the video */
+    background: rgba(255, 255, 255, 0.8); /* Optional: Add a semi-transparent background */
+    padding: 20px; /* Add some padding */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for depth */
+}

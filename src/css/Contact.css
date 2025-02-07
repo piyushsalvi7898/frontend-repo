@@ -1,0 +1,140 @@
+.contact-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px; /* Reduced padding */
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced gap */
+    padding: 15px; /* Reduced padding */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.8); /* Blue shadow */
+    border: 2px solid transparent; /* Transparent border */
+    position: relative; /* Required for the pseudo-element */
+}
+
+.contact-form::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 12px; /* Slightly larger than the form */
+    background: rgba(0, 123, 255, 0.2); /* Light blue background */
+    z-index: -1; /* Place behind the form */
+}
+
+
+
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 3px; /* Reduced margin */
+}
+
+input, select, textarea {
+    padding: 8px; /* Reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px; /* Reduced font size */
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px; /* Reduced minimum height */
+}
+
+button {
+    padding: 10px; /* Reduced padding */
+    background-color: #4CAF50;
+    color: white;
+    font-size: 14px; /* Reduced font size */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background-color: #3e8e41;
+  }
+
+
+ 
+  
+  
+
+.link-column {
+    margin-top: 20px; /* Reduced margin */
+    text-align: center;
+    width: 100%;
+}
+
+.follow-us-title {
+    font-size: 18px; /* Reduced font size */
+    color: #333;
+    margin-bottom: 10px; /* Reduced margin */
+}
+
+.list-unstyled {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Reduced gap */
+}
+
+.ptagg {
+    font-size: 22px; /* Reduced font size */
+    transition: transform 0.3s;
+}
+
+.ptagg:hover {
+    transform: scale(1.2);
+}
+
+
+
+/* ====================== */
+
+.response-message {
+    padding: 10px; /* Add some padding for better appearance */
+    margin: 10px 0; /* Add margin to separate from other elements */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold; /* Make the text bold */
+}
+
+.success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Green border */
+}
+
+.error {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb; /* Red border */
+}

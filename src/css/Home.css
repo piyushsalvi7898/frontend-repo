@@ -1,0 +1,592 @@
+/* Home Container */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Align items to the top */
+    min-height: 100vh; /* Full viewport height */
+    text-align: center; /* Center text */
+  }
+  
+  /* Info Box for Company Info */
+  .info-box {
+    background-color: #fff; /* White background for the box */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside the box */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-top: 20px;
+    margin-bottom: 20px; /* Space below the box */
+    width: 100%; /* Width of the box */
+    max-width: 600px; /* Optional: set a max width */
+    font-weight: bolder;
+  }
+  
+  /* Company Info Styles */
+  .company-info {
+    text-align: center; /* Center the text */
+    margin-top: 50px; /* Add some space from the top */
+  }
+  
+  @keyframes fadeInSlideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px) scale(0.8);
+      text-shadow: none;
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(-10px) scale(1);
+      text-shadow: 2px 2px 10px rgba(44, 62, 80, 0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      text-shadow: 4px 4px 20px rgba(44, 62, 80, 0.8);
+    }
+  }
+  
+  .company-name {
+    font-family: "Arial", sans-serif;
+    font-size: 60px;
+    color: #2c3e50;
+    font-weight: bold;
+    letter-spacing: 2px;
+    opacity: 0; /* Start hidden */
+    transform: translateY(50px) scale(0.8); /* Start slightly lower and smaller */
+    animation: fadeInSlideUp 2s ease-out forwards;
+    animation-delay: 0.5s;
+  }
+  
+  .company-tagline {
+    font-family: "Arial", sans-serif; /* Choose a font family */
+    font-size: 24px; /* Adjust the font size */
+    color: #7f8c8d; /* Lighter color for the tagline */
+    margin-top: 10px; /* Space between the name and tagline */
+  }
+  
+  /* Home Image Styles */
+  .home-image {
+    width: 100%; /* Use full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 300px; /* Set a max width to prevent it from getting too large */
+    margin: 20px auto; /* Center the image with margin on top and bottom */
+    display: block; /* Ensure the image is a block element for centering */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add a subtle shadow for depth */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  /* Add a hover effect */
+  .home-image:hover {
+    transform: scale(1.1); /* Slightly enlarge the image on hover */
+  }
+  
+  /* views containrr */
+  .product-grid {
+    display: flex;
+  
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    justify-content: space-between; /* Even space between items */
+    gap: 30px; /* Adjust the gap for better spacing */
+    margin-top: 50px; /* Adds margin to the top of the grid */
+  }
+  
+  .product {
+    width: calc(33.33% - 20px); /* Ensures three fit in one row */
+    min-width: 250px; /* Prevents shrinking too much on smaller screens */
+    height: 120px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(44, 62, 80, 0.5); /* Shadow effect matching border color */
+    transition:
+      transform 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
+  }
+  
+  .product:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.7); /* Stronger shadow on hover */
+  }
+  
+  @media (max-width: 1024px) {
+    .product {
+      width: calc(50% - 20px); /* 2 items per row on medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .product {
+      width: 10%; /* 1 item per row on small screens */
+    }
+  }
+  
+  .threeeboxcontainer {
+    /* margin-top: 20px;
+      margin-bottom: 20px; */
+    padding-block: 30px;
+  }
+  
+  .product-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .views {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .views div:first-child {
+    margin-right: 70px;
+  }
+  
+  .viewsp1 {
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3498db;
+  }
+  
+  .viewsp2 {
+    color: gray;
+    font-size: 10px;
+  }
+  
+  .views svg {
+    font-size: 30px;
+  }
+  
+  .status-box {
+    cursor: pointer;
+  }
+  
+  /* ----------------- */
+  
+  /* Image Scrolling Container */
+  .image-scrolling-container {
+    position: relative; /* Position relative for absolute positioning of bubbles */
+    overflow: hidden; /* Hide overflow to create a scrolling effect */
+    white-space: nowrap; /* Prevent line breaks */
+    width: 100%; /* Full width */
+    background-image: url("../assets/images/background7jpg.jpeg"); /* Set your background image */
+    background-size: 400% 400%; /* Size of the gradient */
+    padding: 20px 0; /* Padding for the container */
+    margin-top: 70px; /* Space above the container */
+  }
+  
+  /* Bubble Animation */
+  .bubble {
+    position: absolute; /* Position absolute to move freely */
+    bottom: -50px; /* Start below the container */
+    border-radius: 50%; /* Make it circular */
+    background: rgba(255, 255, 255, 0.7); /* White color with some transparency */
+    animation: rise 10s infinite; /* Increased animation duration */
+    opacity: 0.7; /* Slightly transparent */
+  }
+  
+  /* Keyframes for bubble rising */
+  @keyframes rise {
+    0% {
+      transform: translateY(0); /* Start at the bottom */
+      opacity: 1; /* Fully visible */
+    }
+    100% {
+      transform: translateY(-100vh); /* Move up off the screen */
+      opacity: 0; /* Fade out */
+    }
+  }
+  
+  /* Create multiple bubbles with different sizes and animations */
+  .bubble:nth-child(1) {
+    left: 10%;
+    width: 30px;
+    height: 30px;
+    animation-duration: 12s; /* Increased duration */
+    animation-delay: 0s;
+  }
+  
+  .bubble:nth-child(2) {
+    left: 20%;
+    width: 40px;
+    height: 40px;
+    animation-duration: 15s;
+    animation-delay: 2s;
+  }
+  
+  .bubble:nth-child(3) {
+    left: 30%;
+    width: 25px;
+    height: 25px;
+    animation-duration: 18s;
+    animation-delay: 4s;
+  }
+  
+  .bubble:nth-child(4) {
+    left: 40%;
+    width: 35px;
+    height: 35px;
+    animation-duration: 16s;
+    animation-delay: 6s;
+  }
+  
+  .bubble:nth-child(5) {
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    animation-duration: 20s;
+    animation-delay: 8s;
+  }
+  
+  .image-scroll {
+    display: inline-block; /* Allow the images to be in a single line */
+  }
+  
+  .scroll-image {
+    border-radius: 50px;
+    width: 225px; /* Set a fixed width for images */
+    height: 200px; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between images */
+    margin-left: 20px;
+  }
+  
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  /* 4 box container */
+  
+  .main-container {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    width: 100%; /* Full width */
+    max-width: 1200px; /* Optional: set a max width */
+    margin: 20px auto; /* Center the main container */
+  }
+  
+  .row {
+    display: flex; /* Use flexbox for the row */
+    justify-content: space-between; /* Space out the sub-containers */
+    margin-bottom: 20px; /* Space between rows */
+  }
+  
+  .sub-container {
+    flex: 1; /* Each sub-container takes equal space */
+    margin: 0 10px; /* Space between sub-containers */
+    text-align: center; /* Center text inside sub-containers */
+  }
+  
+  /* ----------logoIMAGE-------- */
+  
+  /* Section for BPO and Consultant logos */
+  
+  .bigheadinginmaincontent {
+    font-weight: bolder;
+    font-size: 15px;
+    color: #3498db;
+  }
+  .bpo-consultant-section {
+    display: flex;
+    justify-content: space-between; /* Increased space between items */
+    gap: 40px; /* Adjusted gap for more space between boxes */
+    background-color: #dddcdc; /* Dark gray/black background */
+  
+    margin-top: 50px;
+    box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3); /* Border shadow */
+  }
+  
+  .bpo-consultant-box {
+    width: 300px; /* Adjust the size */
+    height: 450px; /* Adjust the size */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
+    transition:
+      transform 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
+  }
+  
+  .bpo-consultant-box:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.5);
+  }
+  
+  .logo-image {
+    width: 120px; /* Logo width */
+    height: 100px; /* Logo height */
+    object-fit: contain;
+  }
+  
+  .logo-content {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .bpo-consultant-section {
+      flex-direction: column; /* Stack the boxes vertically on small screens */
+      align-items: center;
+    }
+  
+    .bpo-consultant-box {
+      width: 80%; /* Take up full width on small screens */
+      margin-bottom: 20px; /* Space between the boxes */
+    }
+  }
+  
+  /* ----------------------- */
+  
+  .bigsection {
+    display: flex;
+    /* color: white; */
+    height: 80vh; /* Full height of the viewport */
+    gap: 30px; /* Add gap between the left and right boxes */
+  
+  
+    
+  }
+  
+  .left-box {
+    flex: 1; /* Takes up 50% of the width */
+    padding: 20px;
+    background-color: #f0f0f0; /* Light gray background */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    border-right: 1px solid #ccc; /* Add a right border */
+    /* background-image: url("../assets/images/2025.jpg");  */
+    /* background-color: #333; */
+  }
+  
+  .right-box {
+    flex: 1; /* Takes up 50% of the width */
+    display: flex;
+  
+    justify-content: center; /* Center image horizontally */
+    align-items: center; /* Center image vertically */
+    background-color: white; /* Slightly darker gray */
+    border-left: 1px solid #ccc; /* Add a left border */
+    /* color: white; */
+  }
+  
+  .right-box img {
+    max-width: 100%; /* Responsive image */
+    height: 80%; /* Maintain aspect ratio */
+  }
+  
+  @media (max-width: 768px) {
+    .bigsection {
+      flex-direction: column; /* Stack boxes on smaller screens */
+    }
+  
+    .left-box {
+      border-right: none; /* Remove right border on small screens */
+      border-bottom: 1px solid #ccc; /* Add bottom border for separation */
+    }
+  
+    .right-box {
+      border-left: none; /* Remove left border on small screens */
+    }
+  }
+  
+
+  
+  
+  /* HOME VIDEO CSSS */
+  
+  .video-container {
+    /* margin-top: 15px; */
+    width: calc(100% - 0px); /* Set the width to 100% minus 20px for margins */
+    max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+    position: relative; /* Position relative for absolute positioning of the video */
+    overflow: hidden; /* Hide overflow to maintain the container's size */
+    object-fit: cover;
+   
+  }
+  
+  .home-video {
+    height: 70vh;
+    width: 100%; /* Make the video take the full width of the container */
+    height: 100%; /* Make the video take the full height of the container */
+    object-fit: cover; /* Ensure the video covers the area without distortion */
+  }
+  
+  /*  */
+  /* -------------- */
+  
+  
+  /* Footer Styles */
+  
+  /* ============ FOOTER STYLES ============ */
+  
+  .footer {
+    margin-top: 100px;
+    background-color: #333; /* Dark background */
+    color: white; /* White text color */
+    padding: 40px 0; /* Increase padding for better spacing */
+    width: 100%; /* Full width */
+    border-top: 1px solid #ccc; /* Border at the top */
+    height: auto; /* Auto height based on content */
+    min-height: 60px; /* Minimum height */
+  }
+  
+  .footer-content {
+    display: flex; /* Use flexbox for proper layout */
+    justify-content: space-between; /* Spread columns evenly */
+    max-width: 1200px; /* Limit width */
+    margin: 0 auto; /* Center alignment */
+    padding: 0 20px; /* Add padding */
+    flex-wrap: wrap; /* Ensures responsiveness */
+  }
+  
+  .footer-column h5{
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+    color: #3498db; /* Blue heading */
+    margin-bottom: 10px;
+    text-transform: uppercase; /* Capitalized */
+  }
+  
+  
+  
+  .footer-column h3 {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+    color: #3498db; /* Blue heading */
+    margin-bottom: 10px;
+    text-transform: uppercase; /* Capitalized */
+  }
+  
+  /* ============ QUICK LINKS COLUMN ============ */
+  .footer-nav {
+    display: flex;
+    flex-direction: column; /* Quick Links in a column */
+    align-items: flex-start; /* Align to the left */
+  }
+  
+  .footer-links-column {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links-column li {
+    margin-bottom: 10px; /* Space between links */
+  }
+  
+  .footer-links-column a {
+    color: white;
+    text-decoration: none;
+  
+    font-size: 17px;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-links-column a {
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .footer-links-column a:hover {
+    color: gray; /* Hover effect */
+    transform: scale(1.1); /* Slightly increase size */
+  }
+  
+  /* ============ SOCIAL ICONS COLUMN ============ */
+  .social-icons {
+    display: flex;
+    gap: 15px; /* Space between icons */
+  }
+  
+  .social-icon {
+    font-size: 30px; /* Icon size */
+    color: white;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    transform: scale(0.5); /* Slightly increase size */
+    color: red;
+  }
+  
+  /* ============ FOOTER BOTTOM ============ */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  /* ============ RESPONSIVE DESIGN ============ */
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column; /* Stack columns on smaller screens */
+      text-align: center;
+    }
+  
+    .footer-column {
+      margin-bottom: 20px; /* Add space between stacked columns */
+    }
+  
+    .footer-nav {
+      align-items: center; /* Center align Quick Links */
+    }
+  
+    .social-icons {
+      justify-content: center; /* Center align icons */
+    }
+  }
+  
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between; /* Aligns left & right */
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  .footer-content,
+  .footer-column {
+    flex: 1;
+  }
+  
+  .footer-links-column {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .ptagsmallsize{
+    font-size: 18px;
+  
+  }
+  
+  .footer-column a{
+    text-decoration: none;
+    color: white
+  }
+  
+  .footer-column p{
+    font-size: 14px;
+  }
+  
+  
+  
+  
+  /*  */
