@@ -20,7 +20,8 @@ const DashboardPage = ({ isOwner }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/contacts'); // Adjust the URL as needed
+        const response = await axios.get('https://backend-repo.onrender.com/api/contacts'); 
+
         setData(response.data);
       } catch (err) {
         setError(err.message);
