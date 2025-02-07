@@ -61,7 +61,7 @@ const About = () => {
 
                 <section className="history">
                     <h2>Our History</h2>
-                    <p>Founded in 2010, our company has grown from a small startup to a leading provider in our industry. Our journey has been marked by innovation, dedication, and a commitment to our customers.</p>
+                    <p>Founded in 2020, our company has grown from a small startup to a leading provider in our industry. Our journey has been marked by innovation, dedication, and a commitment to our customers.</p>
                 </section>
 
 

@@ -141,36 +141,7 @@ const Contact = () => {
 
                 </form>
 
-                {/* <div className="link-column">
-                <h3 className="follow-us-title">Follow Us</h3>
-                <ul className="list-unstyled d-flex justify-content-center">
-                    <li className="mx-2">
-                        <a href="https://www.facebook.com/p/Yunify-61569461881722/" className="ptagg" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faFacebookF} style={{ color: '#3b5998' }} />
-                        </a>
-                    </li>
-                    <li className="mx-2">
-                        <a href="https://twitter.com/YOUR_COMPANY_HANDLE" className="ptagg" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faTwitter} style={{ color: '#1da1f2' }} />
-                        </a>
-                    </li>
-                    <li className="mx-2">
-                        <a href="https://www.instagram.com/yunify_2024/p/DDb3ji2vmAv/" className="ptagg" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faInstagram} style={{ color: '#e1306c' }} />
-                        </a>
-                    </li>
-                    <li className="mx-2">
-                        <a href="https://in.linkedin.com/in/yunify-hr-and-it-solution-20b704341" className="ptagg" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faLinkedinIn} style={{ color: '#0072b1' }} />
-                        </a>
-                    </li>
-                    <li className="mx-2">
-                        <a href="https://www.youtube.com/c/YOUR_COMPANY_CHANNEL" className="ptagg" target="_blank" rel="noopener noreferrer">
-                            <FontAwesomeIcon icon={faYoutube} style={{ color: '#FF0000' }} />
-                        </a>
-                    </li>
-                </ul>
-            </div> */}
+              
 
             </div>
             <footer className="footer">

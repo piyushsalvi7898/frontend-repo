@@ -128,7 +128,7 @@ const Home = () => {
               <div className="views">
                 <div>
                   <p className="viewsp1">2000+</p>
-                  <p className="viewsp2">sales</p>
+                  <p className="viewsp2">candidates</p>
                 </div>
                 <div>
                   <FontAwesomeIcon
