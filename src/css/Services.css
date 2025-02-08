@@ -29,9 +29,13 @@
     text-align: center; /* Ensures centered text */
 }
 
+
+
+
 /* Prevent text from breaking outside the box */
 .bigheadinginmaincontent,
 .logo-content {
+ 
     word-wrap: break-word; /* Breaks long words */
     overflow-wrap: break-word; /* Ensures words wrap */
     text-align: center; /* Keeps content aligned */
@@ -87,3 +91,19 @@
 
     animation: slideIn 0.8s ease-in-out forwards; /* Apply animation */
 }
+
+
+
+.bigheadinginmaincontent {
+    /* background-color: aquamarine; */
+    font-size: 20px; /* Bigger font size */
+    font-weight: 700; /* Bold text */
+    color: #007bff; /* Professional blue color */
+    text-transform: uppercase; /* Make it all caps */
+    text-align: center; /* Center align */
+    position: relative;
+    display: inline-block;
+    font-style:inherit
+    
+  }
+  

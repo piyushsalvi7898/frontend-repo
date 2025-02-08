@@ -117,7 +117,9 @@
   }
   @media (max-width: 768px) {
     .product {
-      width: 100%; /* One item per row on mobile */
+      width: 90%; /* One item per row on mobile */
+      margin-left: 5%;
+      
     }
   }
   

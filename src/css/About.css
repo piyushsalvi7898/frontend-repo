@@ -39,7 +39,8 @@
     border-radius: 10px; /* Rounded corners */
     object-fit: cover; /* Ensures a good fit */
     margin: 0 auto; /* Centers the image horizontally */
-    border:  1px solid #ecf0f1; /* Optional: Add a border */
+    border:  2px solid #ecf0f1; /* Optional: Add a border */
+    box-shadow: 0 4px 10px rgba(44, 62, 80, 0.5); /* Shadow effect matching border color */
 }
 
 

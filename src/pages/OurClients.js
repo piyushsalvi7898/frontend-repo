@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-
 import "../css/OurClients.css"; // Import CSS file
 
 // Import images
@@ -23,48 +22,92 @@ import brand14 from "../assets/brands/brand14.jpg";
 import brand15 from "../assets/brands/brand15.jpg";
 
 const clients = [
-  { image: brand1, name: "Insta Connect", description: "A leading social media platform." },
-  { image: brand2, name: "L&T Finance", description: "Financial services and solutions." },
-  { image: brand3, name: "ICICI Bank", description: "One of the largest private banks in India." },
-  { image: brand4, name: "Elasticrum", description: "Innovative solutions for businesses." },
-  { image: brand5, name: "Tea Delight", description: "Premium tea products." },
-  { image: brand6, name: "Rasoi Queen", description: "Quality kitchen products." },
-  { image: brand7, name: "D Mart", description: "Popular retail chain." },
-  { image: brand8, name: "Anaxee", description: "Digital marketing solutions." },
-  { image: brand9, name: "Imast", description: "Creative design agency." },
-  { image: brand10, name: "Eureka Forbes", description: "Home appliances and water purifiers." },
-  { image: brand11, name: "Tejas", description: "Leading educational services." },
-  { image: brand12, name: "Navimuki", description: "Innovative tech solutions." },
-  { image: brand13, name: "Club Mahindra", description: "Vacation ownership company." },
-  { image: brand14, name: "Altruist", description: "Socially responsible brand." },
-  { image: brand15, name: "Meesho", description: "E-commerce platform for resellers." },
+  { image: brand1, name: "Insta Connect" },
+  { image: brand2, name: "L&T Finance" },
+  { image: brand3, name: "ICICI Bank" },
+  { image: brand4, name: "Elasticrum" },
+  { image: brand5, name: "Tea Delight" },
+  { image: brand6, name: "Rasoi Queen" },
+  { image: brand7, name: "D Mart" },
+  { image: brand8, name: "Anaxee" },
+  { image: brand9, name: "Imast" },
+  { image: brand10, name: "Eureka Forbes" },
+  { image: brand11, name: "Tejas" },
+  { image: brand12, name: "Navimuki" },
+  { image: brand13, name: "Club Mahindra" },
+  { image: brand14, name: "Altruist" },
+  { image: brand15, name: "Meesho" },
 ];
 
 const OurClients = () => {
   const scrollRef = useRef(null);
-  const scrollSpeed = 1; // Adjust the speed of scrolling
+  const autoScrollRef = useRef(null);
+  const manualScrollRef = useRef(false); // Track manual interaction
 
-  // Effect for scroll animation
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
+  // Function to scroll left manually
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+      manualScrollRef.current = true; // Mark as manual interaction
+      restartAutoScroll();
+    }
+  };
 
-    const scrollImages = () => {
-      if (scrollContainer) {
-        scrollContainer.scrollLeft += scrollSpeed; // Scroll to the right
-        // Reset scroll position to create a continuous effect
-        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-          scrollContainer.scrollLeft = 0; // Reset to the start
+  // Function to scroll right manually
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+      manualScrollRef.current = true; // Mark as manual interaction
+      restartAutoScroll();
+    }
+  };
+
+  // Function to start auto-scrolling
+  const startAutoScroll = () => {
+    autoScrollRef.current = setInterval(() => {
+      if (scrollRef.current) {
+        // Auto-scroll forward
+        scrollRef.current.scrollBy({ left: 2, behavior: "smooth" });
+
+        // If we reach the end, reset to the beginning
+        if (scrollRef.current.scrollLeft >= scrollRef.current.scrollWidth - scrollRef.current.clientWidth) {
+          setTimeout(() => {
+            scrollRef.current.scrollLeft = 0;
+          }, 500); // Short delay to avoid abrupt jump
         }
       }
+    }, 30); // Adjust speed
+  };
 
-      requestAnimationFrame(scrollImages);
+  // Restart auto-scroll after manual interaction
+  const restartAutoScroll = () => {
+    clearInterval(autoScrollRef.current);
+    setTimeout(() => {
+      manualScrollRef.current = false; // Reset manual interaction flag
+      startAutoScroll();
+    }, 1000); // Restart auto-scroll after 3 seconds
+  };
+
+  // Detect manual scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollRef.current) {
+        if (scrollRef.current.scrollLeft >= scrollRef.current.scrollWidth - scrollRef.current.clientWidth) {
+          // If manual scroll reaches the end, restart from the beginning
+          setTimeout(() => {
+            scrollRef.current.scrollLeft = 0;
+          }, 500);
+        }
+      }
     };
 
-    scrollImages(); // Start the scrolling effect
+    scrollRef.current?.addEventListener("scroll", handleScroll);
+    return () => scrollRef.current?.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    return () => {
-      // Cleanup function (if needed)
-    };
+  useEffect(() => {
+    startAutoScroll(); // Start auto-scroll on mount
+    return () => clearInterval(autoScrollRef.current); // Cleanup on unmount
   }, []);
 
   return (
@@ -72,158 +115,159 @@ const OurClients = () => {
       <div className="clients-container">
         <h2>Our Clients</h2>
         <div className="clients-box">
+          {/* Scrollable Client Logos */}
           <div className="clients-scroll" ref={scrollRef}>
-            {clients.concat(clients).map((client, index) => ( // Duplicate for seamless scrolling
-              <div  key={index}>
+            {clients.map((client, index) => (
+              <div key={index}>
                 <div className="image-container">
                   <img src={client.image} alt={client.name} />
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Scroll Buttons */}
+          <button className="scroll-btn left btncolor" onClick={scrollLeft}>❮</button>
+          <button className="scroll-btn right btncolor" onClick={scrollRight}>❯</button>
         </div>
-
-
 
 
         <section className="service-consultant-section">
-        <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">Retail hiring</p>
-          <p className="logo-content">
-            Yunify provides innovative retail hiring solutions, helping
-            businesses streamline their recruitment process with tailored,
-            data-driven approaches. By leveraging advanced technology and
-            industry expertise, Yunify connects retailers with top talent,
-            ensuring a seamless hiring experience and the right fit for every
-            role
-          </p>
-        </div>
-        <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">Marketing</p>
-          <p className="logo-content">
-            Yunify offers comprehensive recruitment services, helping businesses
-            find the right talent for their needs.
-          </p>
-        </div>
-       
-        <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">NBFC Hirinng</p>
-          <p className="logo-content">
-            Yunify is an emerging platform that partners with Non-Banking
-            Financial Companies (NBFCs) to offer dynamic hiring solutions. With
-            a focus on delivering talent across various roles in the financial
-            services industry, Yunify ensures that NBFCs can quickly fill
-            positions with skilled professionals.{" "}
-          </p>
-        </div>
-        <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">Warehouse</p>
-          <p className="logo-content">
-            Yunify offers cybersecurity solutions to protect your business from
-            threats.
-          </p>
-        </div>
-      </section>
+          <div className="service-consultant-box">
+            <p className="bigheadinginmaincontent">Retail hiring</p>
+            <p className="logo-content">
+              Yunify provides innovative retail hiring solutions, helping
+              businesses streamline their recruitment process with tailored,
+              data-driven approaches. By leveraging advanced technology and
+              industry expertise, Yunify connects retailers with top talent,
+              ensuring a seamless hiring experience and the right fit for every
+              role
+            </p>
+          </div>
+          <div className="service-consultant-box">
+            <p className="bigheadinginmaincontent">Marketing</p>
+            <p className="logo-content">
+              Yunify offers comprehensive recruitment services, helping businesses
+              find the right talent for their needs.
+            </p>
+          </div>
 
-        
+          <div className="service-consultant-box">
+            <p className="bigheadinginmaincontent">NBFC Hirinng</p>
+            <p className="logo-content">
+              Yunify is an emerging platform that partners with Non-Banking
+              Financial Companies (NBFCs) to offer dynamic hiring solutions. With
+              a focus on delivering talent across various roles in the financial
+              services industry, Yunify ensures that NBFCs can quickly fill
+              positions with skilled professionals.{" "}
+            </p>
+          </div>
+          <div className="service-consultant-box">
+            <p className="bigheadinginmaincontent">Warehouse</p>
+            <p className="logo-content">
+              Yunify offers cybersecurity solutions to protect your business from
+              threats.
+            </p>
+          </div>
+        </section>
+
       </div>
 
-
-      {/* ==================== */}
-     <footer className="footer">
-                <div className="footer-bottom">
-                    <p>
-                        {" "}
-                        Yunify HR & IT Solutions &copy; {new Date().getFullYear()} original.{" "}
-                    </p>
-                    <p>Follow Us:</p>
-                </div>
-
-                {/* New Column for Social Media Icons */}
-                <div className="link-column">
-                    <ul className="list-unstyled d-flex justify-content-center">
-                        <li className="mx-2">
-                            <a
-                                href="https://www.facebook.com/p/Yunify-61569461881722/"
-                                className="ptagg"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <FontAwesomeIcon
-                                    icon={faFacebookF}
-                                    className="social-icon"
-                                    style={{ color: "#3b5998", fontSize: "30px" }}
-                                />
-                            </a>
-                        </li>
-                        <li className="mx-2">
-                            <a
-                                href="https://twitter.com/YOUR_COMPANY_HANDLE"
-                                className="ptagg"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <FontAwesomeIcon
-                                    icon={faTwitter}
-                                    className="social-icon"
-                                    style={{ color: "#1da1f2", fontSize: "30px" }}
-                                />
-                            </a>
-                        </li>
-                        <li className="mx-2">
-                            <a
-                                href="https://www.instagram.com/yunify_2024/p/DDb3ji2vmAv/"
-                                className="ptagg"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <FontAwesomeIcon
-                                    icon={faInstagram}
-                                    className="social-icon"
-                                    style={{ color: "#e1306c", fontSize: "30px" }}
-                                />
-                            </a>
-                        </li>
-                        <li className="mx-2">
-                            <a
-                                href="https://in.linkedin.com/in/yunify-hr-and-it-solution-20b704341"
-                                className="ptagg"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <FontAwesomeIcon
-                                    icon={faLinkedinIn}
-                                    className="social-icon"
-                                    style={{ color: "#0072b1", fontSize: "30px" }}
-                                />
-                            </a>
-                        </li>
-                        <li className="mx-2">
-                            <a
-                                href="https://www.youtube.com/c/YOUR_COMPANY_CHANNEL"
-                                className="ptagg"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <FontAwesomeIcon
-                                    icon={faYoutube}
-                                    className="social-icon"
-                                    style={{ color: "#FF0000", fontSize: "30px" }}
-                                />
-                            </a>
-                        </li>
-
-                        <li className="mx-2">
-                            <a href="contact@yunify.in" className="ptagg" target="_blank" rel="noopener noreferrer" >
-                                <FontAwesomeIcon icon={faEnvelope} className="social-icon" style={{ color: "#DB4437", fontSize: "30px" }} />
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+        {/* ==================== */}
+            <footer className="footer">
+              <div className="footer-bottom">
+                <p>
+                  {" "}
+                  Yunify HR & IT Solutions &copy; {new Date().getFullYear()} original.{" "}
+                </p>
+                <p>Follow Us:</p>
+              </div>
+      
+              {/* New Column for Social Media Icons */}
+              <div className="link-column">
+                <ul className="list-unstyled d-flex justify-content-center">
+                  <li className="mx-2">
+                    <a
+                      href="https://www.facebook.com/p/Yunify-61569461881722/"
+                      className="ptagg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FontAwesomeIcon
+                        icon={faFacebookF}
+                        className="social-icon"
+                        style={{ color: "#3b5998", fontSize: "30px" }}
+                      />
+                    </a>
+                  </li>
+                  <li className="mx-2">
+                    <a
+                      href="https://twitter.com/YOUR_COMPANY_HANDLE"
+                      className="ptagg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FontAwesomeIcon
+                        icon={faTwitter}
+                        className="social-icon"
+                        style={{ color: "#1da1f2", fontSize: "30px" }}
+                      />
+                    </a>
+                  </li>
+                  <li className="mx-2">
+                    <a
+                      href="https://www.instagram.com/yunify_2024/p/DDb3ji2vmAv/"
+                      className="ptagg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FontAwesomeIcon
+                        icon={faInstagram}
+                        className="social-icon"
+                        style={{ color: "#e1306c", fontSize: "30px" }}
+                      />
+                    </a>
+                  </li>
+                  <li className="mx-2">
+                    <a
+                      href="https://in.linkedin.com/in/yunify-hr-and-it-solution-20b704341"
+                      className="ptagg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FontAwesomeIcon
+                        icon={faLinkedinIn}
+                        className="social-icon"
+                        style={{ color: "#0072b1", fontSize: "30px" }}
+                      />
+                    </a>
+                  </li>
+                  <li className="mx-2">
+                    <a
+                      href="https://www.youtube.com/c/YOUR_COMPANY_CHANNEL"
+                      className="ptagg"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FontAwesomeIcon
+                        icon={faYoutube}
+                        className="social-icon"
+                        style={{ color: "#FF0000", fontSize: "30px" }}
+                      />
+                    </a>
+                  </li>
+      
+                  <li className="mx-2">
+                    <a href="contact@yunify.in" className="ptagg" target="_blank" rel="noopener noreferrer" >
+                      <FontAwesomeIcon icon={faEnvelope} className="social-icon" style={{ color: "#DB4437", fontSize: "30px" }} />
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </footer>
     </>
-
   );
 };
+
 
 export default OurClients;

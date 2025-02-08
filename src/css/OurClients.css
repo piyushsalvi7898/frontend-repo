@@ -132,20 +132,7 @@
   
   /* ============================== */
   
-  .clients-container2 {
-    padding: 40px;
-    background-color: #f9f9f9;
-    /* Light background for contrast */
-    text-align: center;
-    /* Center the heading */
-  }
-  
-  .clients-container2 h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #333;
-    /* Darker color for the heading */
-  }
+
   
   .client-images-grid {
     display: flex;
@@ -244,3 +231,93 @@
       /* 1 item per row on very small screens */
     }
   }
+
+
+
+/* Scroll Buttons */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.5); /* Slightly darker glass effect */
+  border: none;
+  color: #fff;
+  font-size: 28px; /* Larger size for better visibility */
+  padding: 14px 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(12px); /* Slightly stronger blur effect */
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3); /* Darker shadow for more depth */
+  z-index: 10;
+}
+
+/* Left button */
+.scroll-btn.left {
+  left: 15px;
+}
+
+/* Right button */
+.scroll-btn.right {
+  right: 15px;
+}
+
+/* Hover Effects */
+.scroll-btn:hover {
+  background: rgba(255, 255, 255, 0.7); /* Darker hover effect */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+  transform: translateY(-50%) scale(1.15);
+}
+
+/* Active Click Effect */
+.scroll-btn:active {
+  transform: translateY(-50%) scale(1);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Tablet & Small Screens */
+@media (max-width: 1024px) {
+  .scroll-btn {
+    font-size: 24px;
+    padding: 12px 18px;
+  }
+
+  .scroll-btn.left {
+    left: 10px;
+  }
+
+  .scroll-btn.right {
+    right: 10px;
+  }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+  .scroll-btn {
+    font-size: 20px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.6); /* Slightly darker for better mobile visibility */
+  }
+
+  .scroll-btn.left {
+    left: 8px;
+  }
+
+  .scroll-btn.right {
+    right: 8px;
+  }
+}
+
+/* Extra Small Screens (Phones) */
+@media (max-width: 480px) {
+  .scroll-btn {
+    font-size: 18px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.7); /* Darker for small screens */
+  }
+}
+
+
+.btncolor{
+  color: darkslategray;
+}
