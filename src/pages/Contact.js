@@ -27,9 +27,10 @@ const Contact = () => {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:8000/api/contacts", formData, {
+            const res = await axios.post("https://backend-repo.onrender.com/api/contacts", formData, {
                 headers: { "Content-Type": "application/json" },
             });
+
 
             setResponseMessage("Form submitted successfully!");
             setIsError(false);
@@ -141,7 +142,7 @@ const Contact = () => {
 
                 </form>
 
-              
+
 
             </div>
             <footer className="footer">
