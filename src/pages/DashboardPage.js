@@ -187,30 +187,32 @@ const DashboardPage = ({ isOwner }) => {
 
     <div className="Dashboard-container">
       <h1 className="Dashboard-title">Dashboard</h1>
-      <table className="Dashboard-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Company Name</th>
-            <th>Contact No</th>
-            <th>Email</th>
-            <th>Service</th>
-            <th>Message</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item) => (
-            <tr key={item._id}>
-              <td>{item.name}</td>
-              <td>{item.companyName}</td>
-              <td>{item.contactNo}</td>
-              <td>{item.email}</td>
-              <td>{item.service}</td>
-              <td>{item.message}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="Dashboard-table-container">
+  <table className="Dashboard-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Company Name</th>
+        <th>Contact No</th>
+        <th>Email</th>
+        <th>Service</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      {data.map((item) => (
+        <tr key={item._id}>
+          <td data-label="Name">{item.name}</td>
+          <td data-label="Company Name">{item.companyName}</td>
+          <td data-label="Contact No">{item.contactNo}</td>
+          <td data-label="Email">{item.email}</td>
+          <td data-label="Service">{item.service}</td>
+          <td data-label="Message">{item.message}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 
     </div>

@@ -74,7 +74,7 @@ const OurClients = () => {
         <div className="clients-box">
           <div className="clients-scroll" ref={scrollRef}>
             {clients.concat(clients).map((client, index) => ( // Duplicate for seamless scrolling
-              <div className="client-card" key={index}>
+              <div  key={index}>
                 <div className="image-container">
                   <img src={client.image} alt={client.name} />
                 </div>

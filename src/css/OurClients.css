@@ -23,17 +23,10 @@
     overflow: hidden;
   }
   
-  .client-card {
-    width: 100%;
-    text-align: center;
-    background: white;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+
   
   .image-container {
-    border: 5px solid rgba(51, 51, 51, 0.2);
+    border: 1.5px solid rgba(51, 51, 51, 0.2);
     /* Light shadow color */
     box-shadow: 0px 0px 15px rgba(51, 51, 51, 0.4);
     /* Darker shadow */

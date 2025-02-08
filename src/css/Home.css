@@ -55,6 +55,8 @@
     transform: translateY(50px) scale(0.8); /* Start slightly lower and smaller */
     animation: fadeInSlideUp 2s ease-out forwards;
     animation-delay: 0.5s;
+    word-wrap: break-word;
+  font-size: clamp(30px, 5vw, 60px); /* Makes text responsive */
   }
   
   .company-tagline {
@@ -113,12 +115,12 @@
       width: calc(50% - 20px); /* 2 items per row on medium screens */
     }
   }
-  
   @media (max-width: 768px) {
     .product {
-      width: 10%; /* 1 item per row on small screens */
+      width: 100%; /* One item per row on mobile */
     }
   }
+  
   
   .threeeboxcontainer {
     /* margin-top: 20px;
@@ -129,7 +131,7 @@
   .product-info {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center; 
     align-items: center;
     height: 100%;
   }
@@ -246,6 +248,8 @@
   }
   
   .scroll-image {
+ 
+  
     border-radius: 50px;
     width: 225px; /* Set a fixed width for images */
     height: 200px; /* Maintain aspect ratio */
@@ -394,7 +398,10 @@
     .bigsection {
       flex-direction: column; /* Stack boxes on smaller screens */
     }
-  
+    .left-box, .right-box {
+      width: 100%;
+    } 
+
     .left-box {
       border-right: none; /* Remove right border on small screens */
       border-bottom: 1px solid #ccc; /* Add bottom border for separation */
@@ -436,7 +443,7 @@
   /* ============ FOOTER STYLES ============ */
   
   .footer {
-    margin-top: 100px;
+    margin-top: 150px;
     background-color: #333; /* Dark background */
     color: white; /* White text color */
     padding: 40px 0; /* Increase padding for better spacing */
@@ -509,23 +516,30 @@
     transform: scale(1.1); /* Slightly increase size */
   }
   
-  /* ============ SOCIAL ICONS COLUMN ============ */
-  .social-icons {
-    display: flex;
-    gap: 15px; /* Space between icons */
-  }
-  
-  .social-icon {
-    font-size: 30px; /* Icon size */
-    color: white;
-    transition: transform 0.3s ease, color 0.3s ease;
-  }
-  
-  .social-icon:hover {
-    transform: scale(0.5); /* Slightly increase size */
-    color: red;
-  }
-  
+ /* ============ SOCIAL ICONS COLUMN ============ */
+.social-icons {
+  display: flex;
+  gap: 15px; /* Space between icons */
+}
+
+.social-icon {
+  font-size: 30px; /* Icon size */
+  color: white;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.5); /* Slightly increase size on hover */
+  color: red;
+}
+
+.social-icon:active {
+  transform: scale(1.5); /* Maintain size when clicked */
+  color: red; /* Maintain color when clicked */
+}
+
+
+
   /* ============ FOOTER BOTTOM ============ */
   .footer-bottom {
     text-align: center;
@@ -560,6 +574,7 @@
     align-items: center;
     flex-wrap: wrap;
     padding: 20px;
+
   }
   
   .footer-content,

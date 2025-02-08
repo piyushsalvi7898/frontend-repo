@@ -38,13 +38,9 @@ const About = () => {
                         <div className="team-member">
                             <img src={require('../assets/images/CEO2.jpg')} alt="CEO" className="team-image" />
                             <h3 className="team-title">CEO</h3>
-                            <p className="team-name">PIYUSH</p>
+                            <p className="team-name">YOGESH BHAVASAR </p>
                         </div>
-                        {/* <div className="team-member">
-                        <img src={require('../assets/images/CEO.jpg')} alt="CTO" className="team-image" />
-                        <h3 className="team-title">CTO</h3>
-                        <p className="team-name">PIYUSH2</p>
-                    </div> */}
+                  
                     </div>
                 </section>
 

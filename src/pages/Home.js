@@ -285,12 +285,12 @@ const Home = () => {
           <div className="footer-column">
             <h5>Address:</h5>
             <p className="ptagsmallsize">
-              3/9 2nd Floor Mahakal Traders In front of Subhash Nagar <br></br>{" "}
+              3/9 2nd Floor Mahakal Traders In front of Subhash Nagar,  <br></br>{" "}
               Water Tank Near By Pardeshipura Gendeshwar Dham temple Indore,
               India
             </p>
             <h5>Phone:</h5>
-            <p className="ptagsmallsize"> +91 98765 43210</p>
+            <p className="ptagsmallsize"> +91 94248-06680</p>
             <h5>Email:</h5>
             <p className="ptagsmallsize">
               <a href="mailto:contact@yunify.in">contact@yunify.in</a>
@@ -347,7 +347,7 @@ const Home = () => {
                   />
                 </a>
               </li>
-              <li className="mx-2">
+              <li clasocial-iconssName="mx-2">
                 <a
                   href="https://in.linkedin.com/in/yunify-hr-and-it-solution-20b704341"
                   className="ptagg"
@@ -363,7 +363,7 @@ const Home = () => {
               </li>
               <li className="mx-2">
                 <a
-                  href="https://www.youtube.com/c/YOUR_COMPANY_CHANNEL"
+                  href="https://www.youtube.com/results?search_query=yunify+hr+nd+it+solutions"
                   className="ptagg"
                   target="_blank"
                   rel="noopener noreferrer"

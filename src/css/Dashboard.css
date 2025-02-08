@@ -32,52 +32,6 @@
     text-align: center; /* Center the title */
 }
 
-.Dashboard-table {
-    width: 100%; /* Full width */
-    border-collapse: collapse; /* Collapse borders */
-    margin-top: 20px; /* Space above the table */
-}
-
-.Dashboard-table th, .Dashboard-table td {
-    padding: 12px; /* Padding inside table cells */
-    text-align: left; /* Align text to the left */
-    border: 1px solid #ddd; /* Light border */
-}
-
-.Dashboard-table th {
-    background-color: #007bff; /* Header background color */
-    color: white; /* Header text color */
-    font-weight: bold; /* Bold text for headers */
-}
-
-.Dashboard-table tr:nth-child(even) {
-    background-color: #f2f2f2; /* Light gray background for even rows */
-}
-
-.Dashboard-table tr:hover {
-    background-color: #e0e0e0; /* Light gray background on hover */
-}
-
-.Dashboard-table td {
-    color: #555; /* Darker text color for table data */
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 600px) {
-    .Dashboard-title {
-        font-size: 24px; /* Smaller font size for smaller screens */
-    }
-
-    .Dashboard-table th, .Dashboard-table td {
-        padding: 8px; /* Smaller padding for table cells */
-        font-size: 14px; /* Smaller font size for table text */
-    }
-
-    .Dashboard-emoji {
-        font-size: 36px; /* Smaller emoji size for smaller screens */
-    }
-}
-
 
 
 
@@ -111,9 +65,9 @@
 
 
 .PasswordForm-form-container {
-    border: 4px solid #0c692233;
+    border: 2px solid #0c692233;
     /* Light shadow color */
-    box-shadow: 0px 0px 15px rgba(12, 169, 38, 0.4);
+    box-shadow: px 0px 15px rgba(11, 63, 147, 0.4);
     /* Darker shadow */
     background-color: #ffffff; /* White background for the form */
     border-radius: 8px; /* Rounded corners */
@@ -151,7 +105,7 @@
 }
 
 .PasswordForm-button:hover {
-    background-color: green; /* Darker shade on hover */
+    background-color: blue /* Darker shade on hover */
 }
 
 .PasswordForm-error {
@@ -257,4 +211,91 @@
     padding: 20px; /* Add some padding */
     border-radius: 10px; /* Optional: Add rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for depth */
+}
+
+
+
+/* Table Styling */
+.Dashboard-table-container {
+    width: 100%;
+    overflow-x: auto; /* Enables horizontal scrolling on small screens */
+}
+
+.Dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    min-width: 600px; /* Ensures table doesn’t shrink too much */
+}
+
+.Dashboard-table th, 
+.Dashboard-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.Dashboard-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.Dashboard-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.Dashboard-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+.Dashboard-table td {
+    color: #555;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .Dashboard-table-container {
+        overflow-x: auto;
+    }
+
+    .Dashboard-table {
+        font-size: 14px; /* Reduce text size */
+        min-width: 500px; /* Prevents excessive shrinking */
+    }
+
+    .Dashboard-table th, 
+    .Dashboard-table td {
+        padding: 8px;
+    }
+}
+
+/* Mobile-Friendly Table (Converts to Card View) */
+@media (max-width: 480px) {
+    .Dashboard-table thead {
+        display: none; /* Hide headers */
+    }
+
+    .Dashboard-table tbody tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        background: #fff;
+    }
+
+    .Dashboard-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+        padding: 8px;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .Dashboard-table tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+    }
 }

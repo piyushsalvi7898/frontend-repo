@@ -30,31 +30,35 @@
     margin: 40px 0; /* Space above and below the team section */
 }
 
-.team-member {
-    background-color: #f9f9f9; /* Light background for team member boxes */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 20px; /* Padding inside the box */
-    text-align: center; /* Center align text */
-    width: 35%; /* Width of each team member box */
-   
-}
 
 .team-image {
-    width: 100%; /* Make image responsive */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 10px; /* Rounded corners for the image */
+    width: 60%; /* Adjust width to make it smaller (change as needed) */
+    max-width: 300px; /* Ensures it doesn’t get too big */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes extra spacing below the image */
+    border-radius: 10px; /* Rounded corners */
+    object-fit: cover; /* Ensures a good fit */
+    margin: 0 auto; /* Centers the image horizontally */
+    border:  1px solid #ecf0f1; /* Optional: Add a border */
 }
+
 
 .team-title {
     font-weight: bold; /* Bold font for title */
     margin: 10px 0; /* Space above and below the title */
+    color: #4a90e2; /* Vibrant coral color */
+    font-family: 'Montserrat', sans-serif; /* Modern font */
+    font-size: 24px; /* Increase font size for emphasis */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 .team-name {
     font-weight: bold; /* Bold font for name */
+    color: #4a90e2; /* Bright blue color */
+    font-family: 'Raleway', sans-serif; /* Stylish font */
+    font-size: 20px; /* Slightly larger font size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
-
 
 h1 {
     text-align: center;

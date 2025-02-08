@@ -1,11 +1,24 @@
 .navbar {
-    display: flex; /* Use flexbox for layout */
+    display: flex;
+    justify-content: space-between; /* Ensures spacing between elements */
     align-items: center; /* Center items vertically */
     background-color: #333;
     color: white;
-    padding: 10px; /* Adjusted padding for a smaller navbar */
-    font-size: 15px; /* Adjusted font size */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    padding: 10px 20px; /* Adjusted padding */
+    font-size: 15px;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+/* Ensure the navbar items stay aligned */
+.navbar .nav-items {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adds space between nav items */
+}
+
+/* Ensure the button stays aligned */
+.navbar .nav-button {
+    margin-left: auto; /* Pushes button to the right */
 }
 
 .navbar-title {
@@ -59,10 +72,11 @@
     color: white; /* Text color */
     border: none; /* Remove default border */
     border-radius: 5px; /* Rounded corners */
-    padding: 10px 20px; /* Padding for size */
-    font-size: 16px; /* Font size */
+    padding: 5px 20px; /* Padding for size */
+    font-size: 15px; /* Font size */
     cursor: pointer; /* Pointer cursor on hover */
     transition: bacground-color 0.3s, transform 0.2s; /* Smooth transitions */
+   
 }
 
 .menu-toggle:hover {
