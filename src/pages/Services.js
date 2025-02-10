@@ -49,7 +49,7 @@ const Services = () => {
             data-driven approaches. By leveraging advanced technology and
             industry expertise, Yunify connects retailers with top talent,
             ensuring a seamless hiring experience and the right fit for every
-            role
+            role.
           </p>
         </div>
         <div className="service-consultant-box">
@@ -61,11 +61,11 @@ const Services = () => {
         </div>
         <div className="service-consultant-box">
           <p className="bigheadinginmaincontent">Recruitment</p>
-          Yunify offers end-to-end recruitment services, helping businesses find
-          and hire top talent efficiently. From sourcing candidates to managing
-          interviews and onboarding, Yunify streamlines the hiring process,
-          ensuring the best fit for both employers and job seekers
-          <p className="logo-content"></p>
+
+          <p className="logo-content"> Yunify offers end-to-end recruitment services, helping businesses find
+            and hire top talent efficiently. From sourcing candidates to managing
+            interviews and onboarding, Yunify streamlines the hiring process,
+            ensuring the best fit for both employers and job seekers. </p>
         </div>
         <div className="service-consultant-box">
           <p className="bigheadinginmaincontent">Website Solutions</p>
@@ -95,7 +95,7 @@ const Services = () => {
             from finance and banking professionals to insurance specialists.
             With a focus on quality, efficiency, and industry-specific
             expertise, Yunify ensures that the right candidates are matched with
-            the right organizations in the BFSI space.{" "}
+            the right organizations in the BFSI space.
           </p>
         </div>
         <div className="service-consultant-box">
@@ -105,7 +105,7 @@ const Services = () => {
             Financial Companies (NBFCs) to offer dynamic hiring solutions. With
             a focus on delivering talent across various roles in the financial
             services industry, Yunify ensures that NBFCs can quickly fill
-            positions with skilled professionals.{" "}
+            positions with skilled professionals.
           </p>
         </div>
         <div className="service-consultant-box">
@@ -136,7 +136,7 @@ const Services = () => {
             special offers are delivered to customers quickly and efficiently.
             This helps retailers build stronger customer relationships by
             providing timely, personalized service while boosting customer
-            satisfaction and engagement with the loyalty program
+            satisfaction and engagement with the loyalty programme.
           </p>
         </div>
         <div className="service-consultant-box">
@@ -146,7 +146,7 @@ const Services = () => {
             to streamline the management of labor contracts. It helps
             organizations efficiently create, track, and manage contracts with
             employees or contractors, ensuring compliance, timely renewals, and
-            clear communication of terms
+            clear communication of terms.
           </p>
         </div>
         <div className="service-consultant-box">
@@ -160,7 +160,7 @@ const Services = () => {
             store presentations. This service helps retailers maintain
             consistent branding, enhance the customer shopping experience, and
             execute effective visual merchandising strategies across multiple
-            locations
+            locations.
           </p>
         </div>
         <div className="service-consultant-box">
@@ -172,7 +172,7 @@ const Services = () => {
             communication infrastructure and support for voice, data, and
             internet services. This solution helps optimize telecom operations,
             improve service delivery, and enhance overall performance for both
-            employees and customers
+            employees and customers.
           </p>
         </div>
         <div className="service-consultant-box">

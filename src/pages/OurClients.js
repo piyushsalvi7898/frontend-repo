@@ -141,7 +141,7 @@ const OurClients = () => {
               data-driven approaches. By leveraging advanced technology and
               industry expertise, Yunify connects retailers with top talent,
               ensuring a seamless hiring experience and the right fit for every
-              role
+              role.
             </p>
           </div>
           <div className="service-consultant-box">
@@ -159,7 +159,7 @@ const OurClients = () => {
               Financial Companies (NBFCs) to offer dynamic hiring solutions. With
               a focus on delivering talent across various roles in the financial
               services industry, Yunify ensures that NBFCs can quickly fill
-              positions with skilled professionals.{" "}
+              positions with skilled professionals.
             </p>
           </div>
           <div className="service-consultant-box">

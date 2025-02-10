@@ -143,3 +143,12 @@
         font-size: 14px; /* Smaller font size for links */
     }
 }
+
+
+
+.navbar ul li a.active {
+    background-color: rgb(208, 223, 236); /* Same as hover background */
+    color: #333; /* Text color on active link */
+    border-radius:20px; /* Rounded effect */
+    padding: 1px 10px; /* Padding for visibility */
+}
