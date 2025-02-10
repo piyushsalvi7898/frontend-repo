@@ -1,5 +1,6 @@
 // src/DashboardPage.js
 import React, { useEffect, useState } from 'react';
+import { Trash2 } from "lucide-react"; // Import trash icon
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 import "../css/Dashboard.css";
@@ -47,6 +48,28 @@ const DashboardPage = ({ isOwner }) => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Contacts");
     XLSX.writeFile(workbook, "contacts_data.xlsx");
   };
+
+
+  // DELETE FILE
+
+  const handleDelete = async (id) => {
+    console.log("Deleting contact with ID:", id);
+  
+    try {
+      const response = await axios.delete(`https://backend-repo-q9e4.onrender.com/api/contacts/delete/${id}`);
+  
+      if (response.status === 200) {
+        alert("Contact deleted successfully!"); // Show success message
+        window.location.reload(); // Refresh the page
+      }
+    } catch (err) {
+      console.error("Delete Error:", err.response?.data || err.message);
+      alert('Error deleting contact: ' + (err.response?.data?.message || err.message));
+    }
+  };
+  
+
+
 
   if (!isOwner) {
     return <div>You do not have permission to view this page.</div>;
@@ -96,17 +119,24 @@ const DashboardPage = ({ isOwner }) => {
               <th>Email</th>
               <th>Service</th>
               <th>Message</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item) => (
-              <tr key={item.email}>
+              <tr key={item._id}>
                 <td data-label="Name" className='colorname'>{item.name}</td>
                 <td data-label="Company Name">{item.companyName}</td>
                 <td data-label="Contact No">{item.contactNo}</td>
                 <td data-label="Email">{item.email}</td>
                 <td data-label="Service" className='boldword'>{item.service}</td>
                 <td data-label="Message">{item.message}</td>
+
+                <td>
+                  <button className="delete-button" onClick={() => handleDelete(item._id)}>
+                    <Trash2 />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
