@@ -1,4 +1,3 @@
-// src/DashboardPage.js
 import React, { useEffect, useState } from 'react';
 import { Trash2 } from "lucide-react"; // Import trash icon
 import axios from 'axios';
@@ -12,19 +11,21 @@ const DashboardPage = ({ isOwner }) => {
   const [password, setPassword] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const [notification, setNotification] = useState(''); // State for notifications 
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get('https://backend-repo-q9e4.onrender.com/api/contacts');
+      setData(response.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://backend-repo-q9e4.onrender.com/api/contacts');
-        setData(response.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (isAuthenticated) {
       fetchData();
     }
@@ -50,25 +51,32 @@ const DashboardPage = ({ isOwner }) => {
   };
 
 
-  // DELETE FILE
 
   const handleDelete = async (id) => {
-    console.log("Deleting contact with ID:", id);
-  
+    console.log("Delete button clicked, ID:", id); // Debugging
     try {
-      const response = await axios.delete(`https://backend-repo-q9e4.onrender.com/api/contacts/delete/${id}`);
+      await axios.delete(`https://backend-repo-q9e4.onrender.com/api/contacts/delete/${id}`);
+      setNotification("User deleted successfully!"); // Set success notification
+      console.log("Notification set:", "User deleted successfully!"); // Debugging
+      fetchData(); // Refresh the data after deletion
   
-      if (response.status === 200) {
-        alert("Contact deleted successfully!"); // Show success message
-        window.location.reload(); // Refresh the page
-      }
-    } catch (err) {
-      console.error("Delete Error:", err.response?.data || err.message);
-      alert('Error deleting contact: ' + (err.response?.data?.message || err.message));
+      // Clear the notification after 3 seconds
+      setTimeout(() => {
+        setNotification('');
+        console.log("Notification cleared"); // Debugging
+      }, 3000);
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      setNotification("Error deleting user. Please try again."); // Set error notification
+      console.log("Notification set:", "Error deleting user. Please try again."); // Debugging
+  
+      // Clear the notification after 3 seconds
+      setTimeout(() => {
+        setNotification('');
+        console.log("Notification cleared"); // Debugging
+      }, 3000);
     }
   };
-  
-
 
 
   if (!isOwner) {
@@ -109,6 +117,7 @@ const DashboardPage = ({ isOwner }) => {
     <div className="Dashboard-container">
       <h1 className="Dashboard-title">Dashboard</h1>
       <button className="export-button" onClick={exportToExcel}>Download Excel</button>
+      {notification && <div className="notification">{notification}</div>} {/* Display notification */}
       <div className="Dashboard-table-container">
         <table className="Dashboard-table">
           <thead>
@@ -131,7 +140,6 @@ const DashboardPage = ({ isOwner }) => {
                 <td data-label="Email">{item.email}</td>
                 <td data-label="Service" className='boldword'>{item.service}</td>
                 <td data-label="Message">{item.message}</td>
-
                 <td>
                   <button className="delete-button" onClick={() => handleDelete(item._id)}>
                     <Trash2 />

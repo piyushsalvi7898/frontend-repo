@@ -20,10 +20,16 @@ import brand12 from "../assets/brands/brand12.jpg";
 import brand13 from "../assets/brands/brand13.jpg";
 import brand14 from "../assets/brands/brand14.jpg";
 import brand15 from "../assets/brands/brand15.jpg";
+import brand16 from "../assets/brands/brand16.jpg"
+import brand17 from "../assets/brands/brand17.jpg"
+
 
 const clients = [
+
   { image: brand1, name: "Insta Connect" },
   { image: brand2, name: "L&T Finance" },
+  { image: brand16, name: "NEW" },
+  { image: brand17, name: "Turtle" },
   { image: brand3, name: "ICICI Bank" },
   { image: brand4, name: "Elasticrum" },
   { image: brand5, name: "Tea Delight" },
@@ -37,6 +43,8 @@ const clients = [
   { image: brand13, name: "Club Mahindra" },
   { image: brand14, name: "Altruist" },
   { image: brand15, name: "Meesho" },
+
+
 ];
 
 const OurClients = () => {
@@ -67,7 +75,7 @@ const OurClients = () => {
     autoScrollRef.current = setInterval(() => {
       if (scrollRef.current) {
         // Auto-scroll forward
-        scrollRef.current.scrollBy({ left: 2, behavior: "smooth" });
+        scrollRef.current.scrollBy({ left: 10, behavior: "smooth" });
 
         // If we reach the end, reset to the beginning
         if (scrollRef.current.scrollLeft >= scrollRef.current.scrollWidth - scrollRef.current.clientWidth) {
@@ -96,7 +104,7 @@ const OurClients = () => {
           // If manual scroll reaches the end, restart from the beginning
           setTimeout(() => {
             scrollRef.current.scrollLeft = 0;
-          }, 500);
+          }, 100);
         }
       }
     };
