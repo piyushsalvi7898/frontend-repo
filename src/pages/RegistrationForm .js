@@ -25,9 +25,9 @@ const RegistrationForm = () => {
 
   const fetchUniqueId = async () => {
     try {
-        const response = await fetch("https://backend-repo-q9e4.onrender.com/api/candidates/uniqueId");
+      const response = await fetch("https://yunify-web.onrender.com/api/candidates/uniqueId");
       const data = await response.json();
-
+  
       if (response.ok && data.uniqueId) {
         setFormData((prevData) => ({ ...prevData, uniqueId: data.uniqueId }));
       } else {
@@ -39,6 +39,7 @@ const RegistrationForm = () => {
       generateLocalUniqueId();
     }
   };
+  
 
   const generateLocalUniqueId = () => {
     let lastId = "Yunify-10000"; // Default starting ID
@@ -101,20 +102,18 @@ const RegistrationForm = () => {
   };
   
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-        const response = await fetch("https://backend-repo-q9e4.onrender.com/api/candidates", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          });
-          
-
+      const response = await fetch("https://yunify-web.onrender.com/api/candidates", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
       if (response.ok) {
         alert("Candidate registered successfully!");
         generateSlip();
@@ -141,7 +140,7 @@ const RegistrationForm = () => {
       alert("Server error. Try again later.");
     }
   };
-
+  
   return (
     <Container className="registration-container">
       <Card className="registration-card">
