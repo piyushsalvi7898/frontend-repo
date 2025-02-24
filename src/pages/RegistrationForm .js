@@ -27,6 +27,7 @@ const RegistrationForm = () => {
     try {
       const response = await fetch("https://backend-repo-q9e4.onrender.com/api/uniqueId");
 
+
       const data = await response.json();
   
       if (response.ok && data.uniqueId) {
@@ -113,7 +114,8 @@ const RegistrationForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-    });
+      });
+      
     
   
       if (response.ok) {
