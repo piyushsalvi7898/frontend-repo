@@ -19,17 +19,19 @@ const RegistrationForm = () => {
     uniqueId: "", // Will be fetched/generated
   });
 
+  const backendURL = "https://backend-repo-q9e4.onrender.com"; // Your backend URL
+
+  // Fetch unique ID when component mounts
   useEffect(() => {
     fetchUniqueId();
   }, []);
 
   const fetchUniqueId = async () => {
     try {
-      const response = await fetch("https://backend-repo-q9e4.onrender.com/api/uniqueId");
-
+      const response = await fetch(`${backendURL}/api/uniqueId`);
 
       const data = await response.json();
-  
+
       if (response.ok && data.uniqueId) {
         setFormData((prevData) => ({ ...prevData, uniqueId: data.uniqueId }));
       } else {
@@ -41,7 +43,6 @@ const RegistrationForm = () => {
       generateLocalUniqueId();
     }
   };
-  
 
   const generateLocalUniqueId = () => {
     let lastId = "Yunify-10000"; // Default starting ID
@@ -53,20 +54,19 @@ const RegistrationForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
   const generateSlip = () => {
     const doc = new jsPDF();
-    
+
     // Set title
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
     doc.text("Yunify HR & IT Solutions Pvt. Ltd.", 65, 15); // Centered Title
-  
+
     // Add some space
     doc.setFontSize(14);
     doc.text("Candidate Registration Receipt", 75, 25);
     doc.line(20, 30, 190, 30); // Underline
-    
+
     // Table content
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
@@ -84,7 +84,7 @@ const RegistrationForm = () => {
       ["Email", formData.email],
       ["UPI Transaction ID", formData.upiTransactionId],
     ];
-  
+
     let y = 40;
     details.forEach(([key, value]) => {
       doc.setFont("helvetica", "bold");
@@ -93,31 +93,28 @@ const RegistrationForm = () => {
       doc.text(`${value}`, 70, y);
       y += 8;
     });
-  
+
     // Footer Message
     doc.setFontSize(12);
     doc.text("Thank you for registering with Yunify HR & IT Solutions Pvt. Ltd.", 40, y + 10);
     doc.text("We appreciate your trust in our services.", 60, y + 18);
-    
+
     // Save PDF
     doc.save(`Yunify_Registartion_Slip_${formData.uniqueId}.pdf`);
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const response = await fetch("https://backend-repo-q9e4.onrender.com/api/candidates", {
+      const response = await fetch(`${backendURL}/api/candidates`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      
-    
-  
+
       if (response.ok) {
         alert("Candidate registered successfully!");
         generateSlip();
@@ -144,7 +141,7 @@ const RegistrationForm = () => {
       alert("Server error. Try again later.");
     }
   };
-  
+
   return (
     <Container className="registration-container">
       <Card className="registration-card">
@@ -284,6 +281,3 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
-
-
-// DATA ADDDDDDDD
