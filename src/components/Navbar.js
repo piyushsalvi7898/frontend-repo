@@ -24,7 +24,7 @@ const Navbar = () => {
                 <li><Link className={`backgroundclronhover ${location.pathname === "/contact" ? "active" : ""}`} to="/contact">Contact Us</Link></li>
                 <li><Link className={`backgroundclronhover ${location.pathname === "/our-clients" ? "active" : ""}`} to="/our-clients">Our Clients</Link></li>
                 <li><Link className={`backgroundclronhover ${location.pathname === "/dashboard" ? "active" : ""}`} to="/dashboard">Dashboard</Link></li>
-                <li><Link className={`backgroundclronhover ${location.pathname === "/registration-form" ? "active" : ""}`} to="/registration-form">Registration-Form</Link></li>
+                <li><Link className={`backgroundclronhover ${location.pathname === "/registration-form" ? "active" : ""}`} to="/registration-form">Registration</Link></li>
 
             </ul>
         </nav>
