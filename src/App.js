@@ -2,6 +2,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -10,6 +11,7 @@ import Contact from './pages/Contact'; // Import the Contact component
 import Services from './pages/Services'; // Import the Services component
 import DashboardPage from './pages/DashboardPage';
 import OurClients from './pages/OurClients';
+import RegistrationForm from './pages/RegistrationForm ';
 import './css/App.css';
 
 
@@ -25,6 +27,7 @@ const App = () => {
                     <Route path="/services" element={<Services />} /> {/* Use Services component */}
                     <Route path='/dashboard' element={<DashboardPage isOwner={true} />} />
                     <Route path='/our-clients'element={<OurClients />} />
+                    <Route path='/registration-form'element={<RegistrationForm/>} />
                 </Routes>
             </div>
         </Router>
