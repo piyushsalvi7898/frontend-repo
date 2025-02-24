@@ -29,7 +29,6 @@ const RegistrationForm = () => {
   const fetchUniqueId = async () => {
     try {
       const response = await fetch(`${backendURL}/api/uniqueId`);
-
       const data = await response.json();
 
       if (response.ok && data.uniqueId) {
@@ -100,7 +99,7 @@ const RegistrationForm = () => {
     doc.text("We appreciate your trust in our services.", 60, y + 18);
 
     // Save PDF
-    doc.save(`Yunify_Registartion_Slip_${formData.uniqueId}.pdf`);
+    doc.save(`Yunify_Registration_Slip_${formData.uniqueId}.pdf`);
   };
 
   const handleSubmit = async (e) => {
