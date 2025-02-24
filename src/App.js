@@ -27,7 +27,7 @@ const App = () => {
                     <Route path="/services" element={<Services />} /> {/* Use Services component */}
                     <Route path='/dashboard' element={<DashboardPage isOwner={true} />} />
                     <Route path='/our-clients'element={<OurClients />} />
-                    <Route path='/registration-form'element={<RegistrationForm/>} />
+                    <Route path='/registration-form'element={<RegistrationForm/>}   />
                 </Routes>
             </div>
         </Router>

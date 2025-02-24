@@ -25,7 +25,7 @@ const RegistrationForm = () => {
 
   const fetchUniqueId = async () => {
     try {
-      const response = await fetch("https://yunify-web.onrender.com/api/candidates/uniqueId"  );
+      const response = await fetch("https://backend-repo-q9e4.onrender.com/api/uniqueId"  );
       const data = await response.json();
   
       if (response.ok && data.uniqueId) {
@@ -106,7 +106,7 @@ const RegistrationForm = () => {
     e.preventDefault();
   
     try {
-      const response = await fetch("https://yunify-web.onrender.com/api/candidates",      {
+      const response = await fetch("https://backend-repo-q9e4.onrender.com/api/candidates",      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
