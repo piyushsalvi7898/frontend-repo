@@ -24,7 +24,6 @@ const RegistrationForm = () => {
     fetchUniqueId();
   }, []);
 
-
   const fetchUniqueId = async () => {
     try {
       const response = await fetch(`${backendURL}/api/uniqueId`);
@@ -37,7 +36,6 @@ const RegistrationForm = () => {
     }
   };
 
-
   const generateLocalUniqueId = () => {
     const lastId = "Yunify-10000";
     const lastNumber = parseInt(lastId.split("-")[1]) + 1;
@@ -46,6 +44,35 @@ const RegistrationForm = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handlePayment = () => {
+    if (!amount || amount <= 0) {
+      alert("Please enter a valid amount");
+      return;
+    }
+
+    const upiID = "salvipiyush777@ibl"; // Your UPI ID
+    const name = "Piyush Salvi";
+    const txnId = `TXN${Date.now()}`;
+    const refId = `REF${Date.now()}`;
+    const note = "Candidate Registration Payment";
+
+    // Create a UPI payment link
+    const upiURL = `upi://pay?pa=${encodeURIComponent(upiID)}&pn=${encodeURIComponent(name)}&mc=&tid=${txnId}&tr=${refId}&tn=${encodeURIComponent(note)}&am=${encodeURIComponent(amount)}&cu=INR`;
+
+    console.log("🔗 Generated UPI Link:", upiURL);
+
+    // Open the payment page
+    window.open(upiURL, "_blank");
+
+    // Ask user for payment confirmation
+    const userConfirmed = window.confirm("Did you complete the payment?");
+    if (userConfirmed) {
+      handleSubmit(); // Proceed to submit the form if payment is confirmed
+    } else {
+      alert("Payment not completed. Please try again.");
+    }
   };
 
   const generatePDF = () => {
@@ -94,16 +121,9 @@ const RegistrationForm = () => {
     doc.save(`Candidate_Receipt_${formData.uniqueId}.pdf`);
   };
 
-  const handleSubmitAndPay = async (e) => {
-    e.preventDefault();
-    console.log("Submitting form and processing payment...");
-
-    if (!amount || amount <= 0) {
-      alert("Please enter a valid amount");
-      return;
-    }
-
+  const handleSubmit = async () => {
     setIsSubmitting(true);
+    console.log("Submitting form...");
 
     try {
       console.log("Sending request to backend...");
@@ -118,8 +138,8 @@ const RegistrationForm = () => {
 
       if (response.ok) {
         alert("Candidate registered successfully!");
-        generatePDF();
-        fetchUniqueId();
+        generatePDF(); // Generate PDF after successful registration
+        fetchUniqueId(); // Fetch a new unique ID for the next registration
         setFormData({
           uniqueId: formData.uniqueId,
           name: "",
@@ -131,16 +151,6 @@ const RegistrationForm = () => {
           mobile: "",
           reference: ""
         });
-
-        const upiID = "salvipiyush777@ybl";
-        const name = "Piyush Salvi";
-        const txnId = `TXN${Date.now()}`;
-        const refId = `REF${Date.now()}`;
-        const note = "Candidate Registration Payment";
-
-        const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
-        console.log("Generated UPI Link:", upiURL);
-        window.open(upiURL, "_blank");
       } else {
         console.error("Error Response:", responseData);
         alert("Error: " + responseData.message);
@@ -153,11 +163,16 @@ const RegistrationForm = () => {
     setIsSubmitting(false);
   };
 
+  const handleFinalSubmit = (e) => {
+    e.preventDefault();
+    handlePayment(); // Call payment function on submit
+  };
+
   return (
     <Container className="registration-container">
       <Card className="registration-card">
         <h2 className="text-center registration-title">CANDIDATE REGISTRATION</h2>
-        <Form onSubmit={handleSubmitAndPay}>
+        <Form onSubmit={handleFinalSubmit}>
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
@@ -226,37 +241,11 @@ const RegistrationForm = () => {
           </Form.Group>
 
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Processing..." : "Register & Pay"}
+            {isSubmitting ? "Processing..." : "Submit"}
           </Button>
-
-          <Button
-            variant="success"
-            className="mt-3"
-            disabled={!amount || amount <= 0 || !formData.uniqueId} // Prevents payment before registration
-            onClick={() => {
-              if (!formData.name || !formData.mobile || !formData.email) {
-                alert("Please complete the registration form before making payment.");
-                return;
-              }
-
-              const upiID = "salvipiyush777@ibl";
-              const name = "Piyush Salvi";
-              const txnId = `TXN${Date.now()}`;
-              const refId = `REF${Date.now()}`;
-              const note = "Candidate Registration Payment";
-              const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
-
-              window.open(upiURL, "_blank");
-            }}
-          >
-            Pay via UPI
-          </Button>
-
         </Form>
       </Card>
     </Container>
-
-
   );
 };
 
