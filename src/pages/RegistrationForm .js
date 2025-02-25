@@ -120,19 +120,21 @@ const RegistrationForm = () => {
   };
 
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validHRCode = "admin@123";
+    console.log("Submitting form...");
 
+    const validHRCode = "admin@123";
     if (hrPermissionCode !== validHRCode) {
         alert("Invalid HR Permission Code. Please enter the correct code.");
+        console.log("Invalid HR Code");
         return;
     }
 
     setIsSubmitting(true);
+
     try {
+        console.log("Sending request to backend...");
         const response = await fetch(`${backendURL}/api/candidates`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -140,7 +142,7 @@ const RegistrationForm = () => {
         });
 
         const responseData = await response.json();
-        console.log("Response Data:", responseData); // Debugging
+        console.log("Response received:", responseData);
 
         if (response.ok) {
             alert("Candidate registered successfully!");
@@ -156,14 +158,17 @@ const RegistrationForm = () => {
             });
             setHrPermissionCode("");
         } else {
+            console.error("Error Response:", responseData);
             alert("Error: " + responseData.message);
         }
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Catch Error:", error);
         alert("Server error. Try again later.");
     }
+
     setIsSubmitting(false);
 };
+
 
 
   return (
