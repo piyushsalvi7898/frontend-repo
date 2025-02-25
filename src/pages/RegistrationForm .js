@@ -1,34 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import jsPDF from "jspdf";
-// import "jspdf-autotable";
 import "../css/Registration.css";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     uniqueId: "",
     name: "",
-    fatherName: "",
     dob: "",
-    maritalStatus: "",
     address: "",
-    city: "",
-    state: "",
-    pincode: "",
     qualification: "",
-    stream: "",
     passingYear: "",
     experience: "",
     jobTitle: "",
     companyName: "",
     email: "",
     mobile: "",
-    reference: "",
+    reference: ""
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [amount, setAmount] = useState("");
   const [hrPermissionCode, setHrPermissionCode] = useState(""); //add
-
   const backendURL = "https://backend-repo-q9e4.onrender.com";
 
   useEffect(() => {
@@ -59,9 +52,11 @@ const RegistrationForm = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+
+
+
   // =======================================
-
-
   const generatePDF = () => {
     const doc = new jsPDF();
 
@@ -118,56 +113,94 @@ const RegistrationForm = () => {
 
     doc.save(`Candidate_Receipt_${formData.uniqueId}.pdf`);
   };
+  const handleUPIPayment = () => {
+    if (!amount || amount <= 0) {
+      alert("Please enter a valid amount");
+      return;
+    }
+
+    const upiID = "salvipiyush777@ybl";
+    const name = "Piyush Salvi";
+    const txnId = `TXN${Date.now()}`;
+    const refId = `REF${Date.now()}`;
+    const note = "Candidate Registration Payment";
+
+    const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
+
+    window.location.href = upiURL;
+  };
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmitAndPay = async (e) => {
     e.preventDefault();
-    console.log("Submitting form...");
+    console.log("Submitting form and processing payment...");
 
     const validHRCode = "admin@123";
     if (hrPermissionCode !== validHRCode) {
-        alert("Invalid HR Permission Code. Please enter the correct code.");
-        console.log("Invalid HR Code");
-        return;
+      alert("Invalid HR Permission Code. Please enter the correct code.");
+      console.log("Invalid HR Code");
+      return;
+    }
+
+    if (!amount || amount <= 0) {
+      alert("Please enter a valid amount");
+      return;
     }
 
     setIsSubmitting(true);
 
     try {
-        console.log("Sending request to backend...");
-        const response = await fetch(`${backendURL}/api/candidates`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...formData, hrPermissionCode }),
+      console.log("Sending request to backend...");
+      const response = await fetch(`${backendURL}/api/candidates`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, hrPermissionCode }),
+      });
+
+      const responseData = await response.json();
+      console.log("Response received:", responseData);
+
+      if (response.ok) {
+        alert("Candidate registered successfully!");
+        generatePDF();
+        fetchUniqueId();
+        setFormData({
+          uniqueId: formData.uniqueId,
+          name: "",
+          dob: "",
+          address: "",
+          qualification: "",
+          passingYear: "",
+          experience: "",
+          jobTitle: "",
+          companyName: "",
+          email: "",
+          mobile: "",
+          reference: ""
         });
+        setHrPermissionCode("");
 
-        const responseData = await response.json();
-        console.log("Response received:", responseData);
+        // Now trigger UPI Payment
+        const upiID = "salvipiyush777@ybl";
+        const name = "Piyush Salvi";
+        const txnId = `TXN${Date.now()}`;
+        const refId = `REF${Date.now()}`;
+        const note = "Candidate Registration Payment";
 
-        if (response.ok) {
-            alert("Candidate registered successfully!");
-            generatePDF();
-            fetchUniqueId();
-            setFormData({
-                uniqueId: formData.uniqueId,
-                name: "", fatherName: "", dob: "", maritalStatus: "",
-                address: "", city: "", state: "", pincode: "",
-                qualification: "", stream: "", passingYear: "",
-                experience: "", jobTitle: "", companyName: "",
-                email: "", mobile: "", reference: ""
-            });
-            setHrPermissionCode("");
-        } else {
-            console.error("Error Response:", responseData);
-            alert("Error: " + responseData.message);
-        }
+        const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
+        window.location.href = upiURL;
+
+      } else {
+        console.error("Error Response:", responseData);
+        alert("Error: " + responseData.message);
+      }
     } catch (error) {
-        console.error("Catch Error:", error);
-        alert("Server error. Try again later.");
+      console.error("Catch Error:", error);
+      alert("Server error. Try again later.");
     }
 
     setIsSubmitting(false);
-};
+  };
 
 
 
@@ -175,7 +208,7 @@ const RegistrationForm = () => {
     <Container className="registration-container">
       <Card className="registration-card">
         <h2 className="text-center registration-title">CANDIDATE REGISTRATION</h2>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmitAndPay }>
           <Row>
 
             <Col md={6}>
@@ -318,11 +351,21 @@ const RegistrationForm = () => {
             />
           </Form.Group>
 
+          <Form.Group className="mb-3">
+            <Form.Label>Payment Amount (INR)</Form.Label>
+            <Form.Control
+              type="number"
+              name="amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              required
+            />
+          </Form.Group>
 
+          <Button onClick={handleSubmitAndPay} disabled={isSubmitting}>
+  {isSubmitting ? "Processing..." : "Register & Pay"}
+</Button>
 
-          <Button variant="primary" type="submit" className="submit-btn" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit"}
-          </Button>
 
         </Form>
       </Card>

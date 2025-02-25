@@ -12,6 +12,7 @@ import Services from './pages/Services'; // Import the Services component
 import DashboardPage from './pages/DashboardPage';
 import OurClients from './pages/OurClients';
 import RegistrationForm from './pages/RegistrationForm ';
+import AdminCandidateTable from './pages/AdminCandidateTable';
 import './css/App.css';
 
 
@@ -28,6 +29,7 @@ const App = () => {
                     <Route path='/dashboard' element={<DashboardPage isOwner={true} />} />
                     <Route path='/our-clients'element={<OurClients />} />
                     <Route path='/registration-form'element={<RegistrationForm/>}   />
+                    <Route path='/candidates' element={ <AdminCandidateTable/>}  />
                 </Routes>
             </div>
         </Router>
