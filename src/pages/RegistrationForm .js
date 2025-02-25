@@ -48,15 +48,15 @@ const RegistrationForm = () => {
 
   const handlePayment = () => {
     if (!amount || amount <= 0) {
-      alert("Please enter a valid amount");
-      return;
+        alert("Please enter a valid amount");
+        return;
     }
 
-    const upiID = "salvipiyush777@ibl"; // Your UPI ID
-    const name = "Piyush Salvi";
-    const txnId = `TXN${Date.now()}`;
-    const refId = `REF${Date.now()}`;
-    const note = "Candidate Registration Payment";
+    const upiID = "salvipiyush777@ybl"; // Your UPI ID
+    const name = "Piyush Salvi"; // Your name
+    const txnId = `TXN${Date.now()}`; // Transaction ID
+    const refId = `REF${Date.now()}`; // Reference ID
+    const note = "Candidate Registration Payment"; // Payment note
 
     // Create a UPI payment link
     const upiURL = `upi://pay?pa=${encodeURIComponent(upiID)}&pn=${encodeURIComponent(name)}&mc=&tid=${txnId}&tr=${refId}&tn=${encodeURIComponent(note)}&am=${encodeURIComponent(amount)}&cu=INR`;
@@ -69,11 +69,11 @@ const RegistrationForm = () => {
     // Ask user for payment confirmation
     const userConfirmed = window.confirm("Did you complete the payment?");
     if (userConfirmed) {
-      handleSubmit(); // Proceed to submit the form if payment is confirmed
+        handleSubmit(); // Proceed to submit the form if payment is confirmed
     } else {
-      alert("Payment not completed. Please try again.");
+        alert("Payment not completed. Please try again.");
     }
-  };
+};
 
   const generatePDF = () => {
     const doc = new jsPDF();
