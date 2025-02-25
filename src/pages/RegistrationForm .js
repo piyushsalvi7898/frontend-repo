@@ -10,10 +10,7 @@ const RegistrationForm = () => {
     dob: "",
     address: "",
     qualification: "",
-    passingYear: "",
     experience: "",
-    jobTitle: "",
-    companyName: "",
     email: "",
     mobile: "",
     reference: ""
@@ -21,27 +18,25 @@ const RegistrationForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [amount, setAmount] = useState("");
-  const [hrPermissionCode, setHrPermissionCode] = useState(""); //add
   const backendURL = "https://backend-repo-q9e4.onrender.com";
 
   useEffect(() => {
     fetchUniqueId();
   }, []);
 
+
   const fetchUniqueId = async () => {
     try {
       const response = await fetch(`${backendURL}/api/uniqueId`);
+      if (!response.ok) throw new Error("Failed to fetch Unique ID");
       const data = await response.json();
-      if (response.ok && data.uniqueId) {
-        setFormData((prevData) => ({ ...prevData, uniqueId: data.uniqueId }));
-      } else {
-        generateLocalUniqueId();
-      }
+      setFormData((prevData) => ({ ...prevData, uniqueId: data.uniqueId || generateLocalUniqueId() }));
     } catch (error) {
       console.error("Error fetching unique ID:", error);
       generateLocalUniqueId();
     }
   };
+
 
   const generateLocalUniqueId = () => {
     const lastId = "Yunify-10000";
@@ -53,25 +48,15 @@ const RegistrationForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
-
-
-  // =======================================
   const generatePDF = () => {
     const doc = new jsPDF();
-
-    // Company Header - Centered
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
     const headerText = "Yunify HR & IT Solution Pvt. Ltd.";
     const textWidth = doc.getTextWidth(headerText);
     doc.text(headerText, (doc.internal.pageSize.width - textWidth) / 2, 20);
-
-    // Line separator
     doc.setLineWidth(0.5);
-    doc.line(20, 32, 190, 32); // Horizontal line
-
-    // Form Data in Normal Text Format
+    doc.line(20, 32, 190, 32);
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
 
@@ -85,46 +70,33 @@ const RegistrationForm = () => {
       ["Reference", formData.reference],
     ];
 
-    let y = 45; // Initial Y position for the text
-
+    let y = 45;
     fields.forEach(([label, value]) => {
       doc.setFont("helvetica", "bold");
       doc.text(`${label}:`, 20, y);
       doc.setFont("helvetica", "normal");
       doc.text(value || "N/A", 70, y);
-      y += 8; // Spacing between lines
+      y += 8;
     });
 
-    y += 10; // Space before footer
-
-    // Footer Message
+    y += 10;
     doc.setFont("helvetica", "bold");
     doc.setFontSize(12);
     doc.text("Thank you for choosing Yunify HR & IT Solution Pvt. Ltd.", 20, y);
-
     doc.setFont("helvetica", "normal");
     doc.setFontSize(10);
     doc.text("Your application has been successfully submitted and is under review.", 20, y + 8);
     doc.text("We are committed to connecting talented individuals with the right opportunities.", 20, y + 16);
     doc.text("For any further assistance, feel free to reach out to us at:", 20, y + 24);
-
     doc.setFont("helvetica", "bold");
     doc.text("Email: contact@yunify.in  |  Contact: +91 94248-06680", 20, y + 32);
 
     doc.save(`Candidate_Receipt_${formData.uniqueId}.pdf`);
   };
 
-
   const handleSubmitAndPay = async (e) => {
     e.preventDefault();
     console.log("Submitting form and processing payment...");
-
-    const validHRCode = "admin@123";
-    if (hrPermissionCode !== validHRCode) {
-      alert("Invalid HR Permission Code. Please enter the correct code.");
-      console.log("Invalid HR Code");
-      return;
-    }
 
     if (!amount || amount <= 0) {
       alert("Please enter a valid amount");
@@ -138,7 +110,7 @@ const RegistrationForm = () => {
       const response = await fetch(`${backendURL}/api/candidates`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, hrPermissionCode }),
+        body: JSON.stringify({ ...formData }),
       });
 
       const responseData = await response.json();
@@ -154,17 +126,12 @@ const RegistrationForm = () => {
           dob: "",
           address: "",
           qualification: "",
-          passingYear: "",
           experience: "",
-          jobTitle: "",
-          companyName: "",
           email: "",
           mobile: "",
           reference: ""
         });
-        setHrPermissionCode("");
 
-        // Now trigger UPI Payment
         const upiID = "salvipiyush777@ybl";
         const name = "Piyush Salvi";
         const txnId = `TXN${Date.now()}`;
@@ -172,11 +139,8 @@ const RegistrationForm = () => {
         const note = "Candidate Registration Payment";
 
         const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
-
-        console.log("Generated UPI Link:", upiURL); // Debugging
-
-        window.open(upiURL, "_blank"); // Open UPI link in new tab
-
+        console.log("Generated UPI Link:", upiURL);
+        window.open(upiURL, "_blank");
       } else {
         console.error("Error Response:", responseData);
         alert("Error: " + responseData.message);
@@ -189,27 +153,16 @@ const RegistrationForm = () => {
     setIsSubmitting(false);
   };
 
-
   return (
     <Container className="registration-container">
       <Card className="registration-card">
         <h2 className="text-center registration-title">CANDIDATE REGISTRATION</h2>
         <Form onSubmit={handleSubmitAndPay}>
           <Row>
-
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Father's Name</Form.Label>
-                <Form.Control type="text" name="fatherName" value={formData.fatherName} onChange={handleChange} required />
               </Form.Group>
             </Col>
             <Col md={6}>
@@ -220,45 +173,10 @@ const RegistrationForm = () => {
             </Col>
           </Row>
 
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Marital Status</Form.Label>
-                <Form.Select name="maritalStatus" value={formData.maritalStatus} onChange={handleChange} required>
-                  <option value="">Select</option>
-                  <option value="Single">Single</option>
-                  <option value="Married">Married</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Address</Form.Label>
-                <Form.Control type="text" name="address" value={formData.address} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={4}>
-              <Form.Group className="mb-3">
-                <Form.Label>City</Form.Label>
-                <Form.Control type="text" name="city" value={formData.city} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-            <Col md={4}>
-              <Form.Group className="mb-3">
-                <Form.Label>State</Form.Label>
-                <Form.Control type="text" name="state" value={formData.state} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-            <Col md={4}>
-              <Form.Group className="mb-3">
-                <Form.Label>Pincode</Form.Label>
-                <Form.Control type="text" name="pincode" value={formData.pincode} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-          </Row>
+          <Form.Group className="mb-3">
+            <Form.Label>Address</Form.Label>
+            <Form.Control type="text" name="address" value={formData.address} onChange={handleChange} required />
+          </Form.Group>
 
           <Row>
             <Col md={6}>
@@ -269,38 +187,8 @@ const RegistrationForm = () => {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Stream</Form.Label>
-                <Form.Control type="text" name="stream" value={formData.stream} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Passing Year</Form.Label>
-                <Form.Control type="number" name="passingYear" value={formData.passingYear} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group className="mb-3">
                 <Form.Label>Experience</Form.Label>
                 <Form.Control type="text" name="experience" value={formData.experience} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Job Title</Form.Label>
-                <Form.Control type="text" name="jobTitle" value={formData.jobTitle} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Company Name</Form.Label>
-                <Form.Control type="text" name="companyName" value={formData.companyName} onChange={handleChange} required />
               </Form.Group>
             </Col>
           </Row>
@@ -318,24 +206,13 @@ const RegistrationForm = () => {
                 <Form.Control type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
               </Form.Group>
             </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Reference</Form.Label>
+                <Form.Control type="text" name="reference" value={formData.reference} onChange={handleChange} required />
+              </Form.Group>
+            </Col>
           </Row>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Reference</Form.Label>
-            <Form.Control type="text" name="reference" value={formData.reference} onChange={handleChange} />
-          </Form.Group>
-
-
-          <Form.Group className="mb-3">
-            <Form.Label>HR Permission Code</Form.Label>
-            <Form.Control
-              type="password"
-              name="hrPermissionCode"
-              value={hrPermissionCode}
-              onChange={(e) => setHrPermissionCode(e.target.value)}
-              required
-            />
-          </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Payment Amount (INR)</Form.Label>
@@ -352,30 +229,33 @@ const RegistrationForm = () => {
             {isSubmitting ? "Processing..." : "Register & Pay"}
           </Button>
 
-          {/* UPI Payment Button */}
           <Button
             variant="success"
             className="mt-3"
-            disabled={!amount || amount <= 0} // जब तक वैध अमाउंट नहीं होगा, बटन डिसेबल रहेगा
+            disabled={!amount || amount <= 0 || !formData.uniqueId} // Prevents payment before registration
             onClick={() => {
-              const upiID = "salvipiyush777@ybl";
+              if (!formData.name || !formData.mobile || !formData.email) {
+                alert("Please complete the registration form before making payment.");
+                return;
+              }
+
+              const upiID = "salvipiyush777@ibl";
               const name = "Piyush Salvi";
               const txnId = `TXN${Date.now()}`;
               const refId = `REF${Date.now()}`;
               const note = "Candidate Registration Payment";
-
               const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
 
-              window.open(upiURL, "_blank"); // UPI पेमेंट लिंक ओपन होगा
+              window.open(upiURL, "_blank");
             }}
           >
             Pay via UPI
           </Button>
 
-
         </Form>
       </Card>
     </Container>
+
 
   );
 };
