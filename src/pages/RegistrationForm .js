@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import jsPDF from "jspdf";
+import QRCode from 'qrcode';
 import "../css/Registration.css";
 
 const RegistrationForm = () => {
@@ -46,7 +47,7 @@ const RegistrationForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (!amount || amount <= 0) {
         alert("Please enter a valid amount");
         return;
@@ -63,15 +64,30 @@ const RegistrationForm = () => {
 
     console.log("🔗 Generated UPI Link:", upiURL);
 
-    // Open the payment page
-    window.open(upiURL, "_blank");
+    try {
+        // Generate QR code
+        const qrCodeDataUrl = await QRCode.toDataURL(upiURL);
+        
+        // Create an image element to display the QR code
+        const img = document.createElement('img');
+        img.src = qrCodeDataUrl;
+        img.alt = "Scan to pay";
+        img.style.width = "200px"; // Set the desired width
+        img.style.height = "200px"; // Set the desired height
 
-    // Ask user for payment confirmation
-    const userConfirmed = window.confirm("Did you complete the payment?");
-    if (userConfirmed) {
-        handleSubmit(); // Proceed to submit the form if payment is confirmed
-    } else {
-        alert("Payment not completed. Please try again.");
+        // Append the QR code image to the body or a specific container
+        document.body.appendChild(img);
+
+        // Ask user for payment confirmation
+        const userConfirmed = window.confirm("Did you complete the payment?");
+        if (userConfirmed) {
+            handleSubmit(); // Proceed to submit the form if payment is confirmed
+        } else {
+            alert("Payment not completed. Please try again.");
+        }
+    } catch (error) {
+        console.error("Error generating QR code:", error);
+        alert("Failed to generate QR code. Please try again.");
     }
 };
 
