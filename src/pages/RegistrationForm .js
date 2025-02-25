@@ -122,59 +122,48 @@ const RegistrationForm = () => {
 
 
 
-  // ===============================
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validHRCode = "admin@123";
 
-    // HR Permission Code Validation
-    const validHRCode = "admin@123"; // Change this to the actual HR code logic
     if (hrPermissionCode !== validHRCode) {
-      alert("Invalid HR Permission Code. Please enter the correct code.");
-      return;
+        alert("Invalid HR Permission Code. Please enter the correct code.");
+        return;
     }
 
     setIsSubmitting(true);
     try {
-      const response = await fetch(`${backendURL}/api/candidates`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, hrPermissionCode }), //  Send HR Code to Backend
-      });
+        const response = await fetch(`${backendURL}/api/candidates`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...formData, hrPermissionCode }),
+        });
 
-      if (response.ok) {
-        alert("Candidate registered successfully!");
-        generatePDF();
-        fetchUniqueId();
-        setFormData(prev => ({
-          ...prev, uniqueId: prev.uniqueId,
-          name: "",
-          fatherName: "",
-          dob: "",
-          maritalStatus: "",
-          address: "",
-          city: "",
-          state: "",
-          pincode: "",
-          qualification: "",
-          stream: "",
-          passingYear: "",
-          experience: "",
-          jobTitle: "",
-          companyName: "",
-          email: "",
-          mobile: "",
-          reference: "",
-        }));
-        setHrPermissionCode(""); //  Reset HR Permission Code Field
-      } else {
-        alert("Error registering candidate. Please check required fields.");
-      }
+        const responseData = await response.json();
+        console.log("Response Data:", responseData); // Debugging
+
+        if (response.ok) {
+            alert("Candidate registered successfully!");
+            generatePDF();
+            fetchUniqueId();
+            setFormData({
+                uniqueId: formData.uniqueId,
+                name: "", fatherName: "", dob: "", maritalStatus: "",
+                address: "", city: "", state: "", pincode: "",
+                qualification: "", stream: "", passingYear: "",
+                experience: "", jobTitle: "", companyName: "",
+                email: "", mobile: "", reference: ""
+            });
+            setHrPermissionCode("");
+        } else {
+            alert("Error: " + responseData.message);
+        }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Server error. Try again later.");
+        console.error("Error:", error);
+        alert("Server error. Try again later.");
     }
     setIsSubmitting(false);
-  };
+};
 
 
   return (
