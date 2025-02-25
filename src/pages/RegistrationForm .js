@@ -113,22 +113,6 @@ const RegistrationForm = () => {
 
     doc.save(`Candidate_Receipt_${formData.uniqueId}.pdf`);
   };
-  const handleUPIPayment = () => {
-    if (!amount || amount <= 0) {
-      alert("Please enter a valid amount");
-      return;
-    }
-
-    const upiID = "salvipiyush777@ybl";
-    const name = "Piyush Salvi";
-    const txnId = `TXN${Date.now()}`;
-    const refId = `REF${Date.now()}`;
-    const note = "Candidate Registration Payment";
-
-    const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
-
-    window.location.href = upiURL;
-  };
 
 
   const handleSubmitAndPay = async (e) => {
@@ -188,7 +172,10 @@ const RegistrationForm = () => {
         const note = "Candidate Registration Payment";
 
         const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
-        window.location.href = upiURL;
+
+        console.log("Generated UPI Link:", upiURL); // Debugging
+
+        window.open(upiURL, "_blank"); // Open UPI link in new tab
 
       } else {
         console.error("Error Response:", responseData);
@@ -203,12 +190,11 @@ const RegistrationForm = () => {
   };
 
 
-
   return (
     <Container className="registration-container">
       <Card className="registration-card">
         <h2 className="text-center registration-title">CANDIDATE REGISTRATION</h2>
-        <Form onSubmit={handleSubmitAndPay }>
+        <Form onSubmit={handleSubmitAndPay}>
           <Row>
 
             <Col md={6}>
@@ -362,9 +348,29 @@ const RegistrationForm = () => {
             />
           </Form.Group>
 
-          <Button onClick={handleSubmitAndPay} disabled={isSubmitting}>
-  {isSubmitting ? "Processing..." : "Register & Pay"}
-</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Processing..." : "Register & Pay"}
+          </Button>
+
+          {/* UPI Payment Button */}
+          <Button
+            variant="success"
+            className="mt-3"
+            disabled={!amount || amount <= 0} // जब तक वैध अमाउंट नहीं होगा, बटन डिसेबल रहेगा
+            onClick={() => {
+              const upiID = "salvipiyush777@ybl";
+              const name = "Piyush Salvi";
+              const txnId = `TXN${Date.now()}`;
+              const refId = `REF${Date.now()}`;
+              const note = "Candidate Registration Payment";
+
+              const upiURL = `upi://pay?pa=${upiID}&pn=${name}&mc=&tid=${txnId}&tr=${refId}&tn=${note}&am=${amount}&cu=INR`;
+
+              window.open(upiURL, "_blank"); // UPI पेमेंट लिंक ओपन होगा
+            }}
+          >
+            Pay via UPI
+          </Button>
 
 
         </Form>
