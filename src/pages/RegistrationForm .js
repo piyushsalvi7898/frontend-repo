@@ -236,7 +236,21 @@ const RegistrationForm = () => {
                 <Form.Control type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
               </Form.Group>
             </Col>
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>Reference</Form.Label>
+                <Form.Control type="text" name="reference" placeholder="Entre the name of person who referred you" value={formData.mobile} onChange={handleChange} required />
+              </Form.Group>
+            </Col>
+
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>HR Code</Form.Label>
+                <Form.Control type="text" name="hrCode" placeholder="Get it done by HR " value={formData.mobile} onChange={handleChange} required />
+              </Form.Group>
+            </Col>
           </Row>
+
 
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Processing..." : "Submit"}
