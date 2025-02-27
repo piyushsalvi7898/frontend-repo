@@ -7,20 +7,24 @@ const RegistrationForm = () => {
   const initialFormData = {
     uniqueId: "",
     name: "",
-    fatherName: "", // Add father's name to the initial form data
+    fatherName: "",
     dob: "",
     address: "",
     qualification: "",
     experience: "",
     email: "",
     mobile: "",
-    reference: ""
-  
+    reference: "",
+    hrCode: "" // HR Code field
   };
 
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const backendURL = "https://backend-repo-q9e4.onrender.com";
+
+  // Predefined HR Code (Change this as per your requirement)
+  const HR_SECRET_CODE = "YunifyHR2024";
 
   useEffect(() => {
     fetchUniqueId();
@@ -31,14 +35,12 @@ const RegistrationForm = () => {
       const response = await fetch(`${backendURL}/api/uniqueId`);
       if (!response.ok) throw new Error("Failed to fetch Unique ID");
       const data = await response.json();
-      console.log("Fetched Unique ID:", data.uniqueId); // Debugging log
       setFormData((prevData) => ({
         ...prevData,
         uniqueId: data.uniqueId
       }));
     } catch (error) {
-      console.error("Error fetching unique ID:", error);
-      generateLocalUniqueId(); // Fallback to local ID generation
+      generateLocalUniqueId();
     }
   };
 
@@ -51,53 +53,6 @@ const RegistrationForm = () => {
     }));
   };
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(20);
-    const headerText = "Yunify HR & IT Solution Pvt. Ltd.";
-    const textWidth = doc.getTextWidth(headerText);
-    doc.text(headerText, (doc.internal.pageSize.width - textWidth) / 2, 20);
-    doc.setLineWidth(0.5);
-    doc.line(20, 32, 190, 32);
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(12);
-
-    const fields = [
-      ["Unique ID", formData.uniqueId],
-      ["Name", formData.name],
-      ["Father's Name", formData.fatherName], // Include father's name in the PDF
-      ["Date of Birth", formData.dob],
-      ["Qualification", formData.qualification],
-      ["Email", formData.email],
-      ["Mobile", formData.mobile],
-      ["Reference", formData.reference],
-    ];
-
-    let y = 45;
-    fields.forEach(([label, value]) => {
-      doc.setFont("helvetica", "bold");
-      doc.text(`${label}:`, 20, y);
-      doc.setFont("helvetica", "normal");
-      doc.text(value || "N/A", 70, y);
-      y += 8;
-    });
-
-    y += 10;
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(12);
-    doc.text("Thank you for choosing Yunify HR & IT Solution Pvt. Ltd.", 20, y);
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.text("Your application has been successfully submitted and is under review.", 20, y + 8);
-    doc.text("We are committed to connecting talented individuals with the right opportunities.", 20, y + 16);
-    doc.text("For any further assistance, feel free to reach out to us at:", 20, y + 24);
-    doc.setFont("helvetica", "bold");
-    doc.text("Email: contact@yunify.in  |  Contact: +91 94248-06680", 20, y + 32);
-
-    doc.save(`Candidate_Receipt_${formData.uniqueId}.pdf`);
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -106,15 +61,21 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError("");
 
-    // Validate mobile number before submission
-    if (!/^\d{10}$/.test(formData.mobile)) {
-      alert("Please enter a valid 10-digit mobile number.");
+    // Validate HR Code
+    if (formData.hrCode !== HR_SECRET_CODE) {
+      setError("Invalid HR Code! Please enter the correct code.");
       setIsSubmitting(false);
       return;
     }
 
-    console.log("Form Data to Submit:", formData); // Log the form data
+    // Validate mobile number
+    if (!/^\d{10}$/.test(formData.mobile)) {
+      setError("Please enter a valid 10-digit mobile number.");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch(`${backendURL}/api/candidates`, {
@@ -127,16 +88,13 @@ const RegistrationForm = () => {
 
       if (response.ok) {
         alert("Candidate registered successfully!");
-        generatePDF();
         fetchUniqueId();
         resetForm();
       } else {
-        console.error("Error Response:", responseData);
-        alert("Error: " + (responseData.error || "An unknown error occurred."));
+        setError(responseData.error || "An unknown error occurred.");
       }
     } catch (error) {
-      console.error("Catch Error:", error);
-      alert("Server error. Try again later.");
+      setError("Server error. Try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -144,12 +102,14 @@ const RegistrationForm = () => {
 
   const resetForm = () => {
     setFormData(initialFormData);
+    setError("");
   };
 
   return (
     <Container className="registration-container">
       <Card className="registration-card">
         <h2 className="text-center registration-title">CANDIDATE REGISTRATION</h2>
+        {error && <p className="text-danger text-center">{error}</p>}
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
@@ -159,14 +119,12 @@ const RegistrationForm = () => {
               </Form.Group>
             </Col>
 
-          {/* fatherName */}
-          <Col md={6}>
+            <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>fatherName</Form.Label>
+                <Form.Label>Father's Name</Form.Label>
                 <Form.Control type="text" name="fatherName" value={formData.fatherName} onChange={handleChange} required />
               </Form.Group>
             </Col>
-
 
             <Col md={6}>
               <Form.Group className="mb-3">
@@ -191,7 +149,13 @@ const RegistrationForm = () => {
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Experience</Form.Label>
-                <Form.Control type="text" name="experience" value={formData.experience} onChange={handleChange} required />
+                <Form.Select name="experience" value={formData.experience} onChange={handleChange} required>
+                  <option value="">Select Experience</option>
+                  <option value="0-1 years">0-1 years</option>
+                  <option value="1-3 years">1-3 years</option>
+                  <option value="3-5 years">3-5 years</option>
+                  <option value="5+ years">5+ years</option>
+                </Form.Select>
               </Form.Group>
             </Col>
           </Row>
@@ -213,11 +177,18 @@ const RegistrationForm = () => {
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Reference</Form.Label>
-                <Form.Control type="text" name="reference" value={formData.reference} onChange={handleChange} />
+                <Form.Control type="text" name="reference"  placeholder="Enter the name of the person who referred you"  value={formData.reference} onChange={handleChange} />
+              </Form.Group>
+            </Col>
+
+            {/* HR Code Field */}
+            <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>HR Code</Form.Label>
+                <Form.Control type="password" name="hrCode"  placeholder="Get it done by your HR"  value={formData.hrCode} onChange={handleChange} required />
               </Form.Group>
             </Col>
           </Row>
-
 
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Processing..." : "Submit"}
