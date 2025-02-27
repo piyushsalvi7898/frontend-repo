@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 import "../css/Registration.css";
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     uniqueId: "",
     name: "",
     dob: "",
@@ -14,8 +14,9 @@ const RegistrationForm = () => {
     email: "",
     mobile: "",
     reference: ""
-  });
+  };
 
+  const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const backendURL = "https://backend-repo-q9e4.onrender.com";
 
@@ -28,7 +29,10 @@ const RegistrationForm = () => {
       const response = await fetch(`${backendURL}/api/uniqueId`);
       if (!response.ok) throw new Error("Failed to fetch Unique ID");
       const data = await response.json();
-      setFormData((prevData) => ({ ...prevData, uniqueId: data.uniqueId || generateLocalUniqueId() }));
+      setFormData((prevData) => ({
+        ...prevData,
+        uniqueId: data.uniqueId || generateLocalUniqueId()
+      }));
     } catch (error) {
       console.error("Error fetching unique ID:", error);
       generateLocalUniqueId();
@@ -38,11 +42,15 @@ const RegistrationForm = () => {
   const generateLocalUniqueId = () => {
     const lastId = "Yunify-10000";
     const lastNumber = parseInt(lastId.split("-")[1]) + 1;
-    setFormData((prevData) => ({ ...prevData, uniqueId: `Yunify-${lastNumber}` }));
+    setFormData((prevData) => ({
+      ...prevData,
+      uniqueId: `Yunify-${lastNumber}`
+    }));
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const generatePDF = () => {
@@ -92,47 +100,38 @@ const RegistrationForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     setIsSubmitting(true);
-    console.log("Submitting form...");
-  
+
     try {
-      console.log("Sending request to backend...");
       const response = await fetch(`${backendURL}/api/candidates`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData }),
+        body: JSON.stringify(formData),
       });
-  
+
       const responseData = await response.json();
-      console.log("Response received:", responseData);
-  
+
       if (response.ok) {
         alert("Candidate registered successfully!");
-        generatePDF(); // Generate PDF after successful registration
-        fetchUniqueId(); // Fetch a new unique ID for the next registration
-        setFormData({
-          uniqueId: formData.uniqueId,
-          name: "",
-          dob: "",
-          address: "",
-          qualification: "",
-          experience: "",
-          email: "",
-          mobile: "",
-          reference: ""
-        });
+        generatePDF();
+        fetchUniqueId();
+        resetForm();
       } else {
-        // Log the entire response for debugging
+        // Improved error handling
         console.error("Error Response:", responseData);
-        alert("Error: " + (responseData.message || "An unknown error occurred."));
+        alert("Error: " + (responseData.error || "An unknown error occurred."));
       }
     } catch (error) {
       console.error("Catch Error:", error);
       alert("Server error. Try again later.");
+    } finally {
+      setIsSubmitting(false);
     }
-  
-    setIsSubmitting(false);
+  };
+
+  const resetForm = () => {
+    setFormData(initialFormData);
   };
 
   return (
@@ -191,7 +190,7 @@ const RegistrationForm = () => {
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Reference</Form.Label>
-                <Form.Control type="text" name="reference" value={formData.reference} onChange={handleChange} required />
+                <Form.Control type="text" name="reference" value={formData.reference} onChange={handleChange} />
               </Form.Group>
             </Col>
           </Row>
