@@ -5,7 +5,7 @@ import "jspdf-autotable";
 import "../css/Registration.css";
 
 
-// data inserted in the form will be saved in the pdf file
+
 const initialFormData = {
   uniqueId: "",
   name: "",
