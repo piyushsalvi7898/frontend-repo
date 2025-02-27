@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import jsPDF from "jspdf";
-import "../css/Registration.css";
+import "jspdf-autotable";
+import "../css/Registration.css";              
+
+const initialFormData = {
+  uniqueId: "",
+  name: "",
+  fatherName: "",
+  dob: "",
+  address: "",
+  qualification: "",
+  experience: "",
+  email: "",
+  mobile: "",
+  reference: "",
+  hrCode: "" // HR Code field
+};
 
 const RegistrationForm = () => {
-  const initialFormData = {
-    uniqueId: "",
-    name: "",
-    fatherName: "",
-    dob: "",
-    address: "",
-    qualification: "",
-    experience: "",
-    email: "",
-    mobile: "",
-    reference: "",
-    hrCode: "" // HR Code field
-  };
-
   const [formData, setFormData] = useState(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const backendURL = "https://backend-repo-q9e4.onrender.com";
 
-  // Predefined HR Code (Change this as per your requirement)
-  const HR_SECRET_CODE = "YunifyHR2024";
+  // Predefined HR Code
+  const HR_SECRET_CODE = "7898";
 
   useEffect(() => {
     fetchUniqueId();
@@ -58,6 +59,67 @@ const RegistrationForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+  
+    // Get Current Date
+    const currentDate = new Date().toLocaleDateString();
+  
+    // Company Name Header
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text("Yunify HR & IT Solutions Pvt. Ltd.", 20, 20);
+  
+    // Subtitle
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "normal");
+    doc.text("Candidate Registration Form", 20, 30);
+  
+    // Draw a line
+    doc.setLineWidth(0.5);
+    doc.line(20, 35, 190, 35);
+  
+    // Table Content
+    const tableColumn = ["Field", "Details"];
+    const tableRows = [
+      ["Unique ID", formData.uniqueId],
+      ["Name", formData.name],
+      ["Address", formData.address],
+      ["Qualification", formData.qualification],
+      ["Experience", formData.experience],
+      ["Email", formData.email],
+      ["Mobile", formData.mobile],
+      ["Reference", formData.reference],
+      ["Registration Date", currentDate], // Added Registration Date
+    ];
+  
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 40,
+      theme: "grid",
+      styles: { fontSize: 12, cellPadding: 3 },
+      headStyles: { fillColor: [0, 102, 204] }, // Blue header
+    });
+  
+    // Footer Content
+    const finalY = doc.lastAutoTable.finalY + 10;
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text("Thank you for registering with Yunify HR & IT Solutions Pvt. Ltd.", 20, finalY + 10);
+    
+    doc.setFont("helvetica", "normal");
+    doc.text("For any queries, contact us at support@yunifyhr.com", 20, finalY + 20);
+  
+    // Save the PDF
+    doc.save(`Candidate_${formData.uniqueId}.pdf`);
+  };
+  
+
+
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -88,6 +150,7 @@ const RegistrationForm = () => {
 
       if (response.ok) {
         alert("Candidate registered successfully!");
+        generatePDF(); // PDF generate aur save ho jayega
         fetchUniqueId();
         resetForm();
       } else {
@@ -171,21 +234,6 @@ const RegistrationForm = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Mobile</Form.Label>
                 <Form.Control type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
-              </Form.Group>
-            </Col>
-
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Reference</Form.Label>
-                <Form.Control type="text" name="reference"  placeholder="Enter the name of the person who referred you"  value={formData.reference} onChange={handleChange} />
-              </Form.Group>
-            </Col>
-
-            {/* HR Code Field */}
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>HR Code</Form.Label>
-                <Form.Control type="password" name="hrCode"  placeholder="Get it done by your HR"  value={formData.hrCode} onChange={handleChange} required />
               </Form.Group>
             </Col>
           </Row>
