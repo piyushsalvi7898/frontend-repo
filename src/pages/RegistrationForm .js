@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import "../css/Registration.css";              
+import "../css/Registration.css";
 
 const initialFormData = {
   uniqueId: "",
@@ -65,26 +65,26 @@ const RegistrationForm = () => {
       console.error("No form data available");
       return;
     }
-  
+
     const doc = new jsPDF();
-  
+
     // Get Current Date
     const currentDate = new Date().toLocaleDateString();
-  
+
     // Company Name Header
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
     doc.text("Yunify HR & IT Solutions Pvt. Ltd.", 20, 20);
-  
+
     // Subtitle
     doc.setFontSize(14);
     doc.setFont("helvetica", "normal");
     doc.text("Candidate Registration Form", 20, 30);
-  
+
     // Draw a line
     doc.setLineWidth(0.5);
     doc.line(20, 35, 190, 35);
-  
+
     // Table Data
     const tableColumn = ["Field", "Details"];
     const tableRows = [
@@ -98,7 +98,7 @@ const RegistrationForm = () => {
       ["Reference", formData.reference || "N/A"],
       ["Registration Date", currentDate], // Added Registration Date
     ];
-  
+
     // Generate Table
     doc.autoTable({
       head: [tableColumn],
@@ -108,21 +108,21 @@ const RegistrationForm = () => {
       styles: { fontSize: 12, cellPadding: 3 },
       headStyles: { fillColor: [0, 102, 204], textColor: [255, 255, 255] }, // Blue header with white text
     });
-  
+
     // Footer Content
     const finalY = doc.lastAutoTable.finalY + 10 || 100;
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
     doc.text("Thank you for registering with Yunify HR & IT Solutions Pvt. Ltd.", 20, finalY + 10);
-  
+
     doc.setFont("helvetica", "normal");
     doc.text("For any queries, contact us at support@yunifyhr.com", 20, finalY + 20);
-  
+
     // Save the PDF
     doc.save(`Candidate_${formData.uniqueId || "Yunify"}.pdf`);
   };
-  
-  
+
+
 
 
 
@@ -158,7 +158,7 @@ const RegistrationForm = () => {
 
       if (response.ok) {
         alert("Candidate registered successfully!");
-        generatePDF(); // PDF generate aur save ho jayega
+        generatePDF(formData); // Pass the formData
         fetchUniqueId();
         resetForm();
       } else {
