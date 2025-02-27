@@ -59,7 +59,13 @@ const RegistrationForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const generatePDF = () => {
+
+  const generatePDF = (formData) => {
+    if (!formData) {
+      console.error("No form data available");
+      return;
+    }
+  
     const doc = new jsPDF();
   
     // Get Current Date
@@ -79,41 +85,43 @@ const RegistrationForm = () => {
     doc.setLineWidth(0.5);
     doc.line(20, 35, 190, 35);
   
-    // Table Content
+    // Table Data
     const tableColumn = ["Field", "Details"];
     const tableRows = [
-      ["Unique ID", formData.uniqueId],
-      ["Name", formData.name],
-      ["Address", formData.address],
-      ["Qualification", formData.qualification],
-      ["Experience", formData.experience],
-      ["Email", formData.email],
-      ["Mobile", formData.mobile],
-      ["Reference", formData.reference],
+      ["Unique ID", formData.uniqueId || "N/A"],
+      ["Name", formData.name || "N/A"],
+      ["Address", formData.address || "N/A"],
+      ["Qualification", formData.qualification || "N/A"],
+      ["Experience", formData.experience || "N/A"],
+      ["Email", formData.email || "N/A"],
+      ["Mobile", formData.mobile || "N/A"],
+      ["Reference", formData.reference || "N/A"],
       ["Registration Date", currentDate], // Added Registration Date
     ];
   
+    // Generate Table
     doc.autoTable({
       head: [tableColumn],
       body: tableRows,
       startY: 40,
       theme: "grid",
       styles: { fontSize: 12, cellPadding: 3 },
-      headStyles: { fillColor: [0, 102, 204] }, // Blue header
+      headStyles: { fillColor: [0, 102, 204], textColor: [255, 255, 255] }, // Blue header with white text
     });
   
     // Footer Content
-    const finalY = doc.lastAutoTable.finalY + 10;
+    const finalY = doc.lastAutoTable.finalY + 10 || 100;
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
     doc.text("Thank you for registering with Yunify HR & IT Solutions Pvt. Ltd.", 20, finalY + 10);
-    
+  
     doc.setFont("helvetica", "normal");
     doc.text("For any queries, contact us at support@yunifyhr.com", 20, finalY + 20);
   
     // Save the PDF
-    doc.save(`Candidate_${formData.uniqueId}.pdf`);
+    doc.save(`Candidate_${formData.uniqueId || "Yunify"}.pdf`);
   };
+  
   
 
 
