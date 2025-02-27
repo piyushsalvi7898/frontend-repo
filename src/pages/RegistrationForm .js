@@ -4,8 +4,6 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import "../css/Registration.css";
 
-
-
 const initialFormData = {
   uniqueId: "",
   name: "",
@@ -17,7 +15,7 @@ const initialFormData = {
   email: "",
   mobile: "",
   reference: "",
-  hrCode: "" // HR Code field
+  hrCode: "", // HR Code field
 };
 
 const RegistrationForm = () => {
@@ -40,7 +38,7 @@ const RegistrationForm = () => {
       const data = await response.json();
       setFormData((prevData) => ({
         ...prevData,
-        uniqueId: data.uniqueId
+        uniqueId: data.uniqueId,
       }));
     } catch (error) {
       generateLocalUniqueId();
@@ -52,7 +50,7 @@ const RegistrationForm = () => {
     const lastNumber = parseInt(lastId.split("-")[1]) + 1;
     setFormData((prevData) => ({
       ...prevData,
-      uniqueId: `Yunify-${lastNumber}`
+      uniqueId: `Yunify-${lastNumber}`,
     }));
   };
 
@@ -60,7 +58,6 @@ const RegistrationForm = () => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
 
   const generatePDF = (formData) => {
     if (!formData) {
@@ -115,21 +112,23 @@ const RegistrationForm = () => {
     const finalY = doc.lastAutoTable.finalY + 10 || 100;
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
-    doc.text("Thank you for registering with Yunify HR & IT Solutions Pvt. Ltd.", 20, finalY + 10);
+    doc.text(
+      "Thank you for registering with Yunify HR & IT Solutions Pvt. Ltd.",
+      20,
+      finalY + 10
+    );
 
     doc.setFont("helvetica", "normal");
-    doc.text("For any queries, contact us at support@yunifyhr.com", 20, finalY + 20);
+    doc.text(
+      "For any queries, contact us at support@yunifyhr.com",
+      20,
+      finalY + 20
+    );
 
     // Save the PDF
     doc.save(`Candidate_${formData.uniqueId || "Yunify"}.pdf`);
     console.log("PDF Generated");
   };
-
-
-
-
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -185,48 +184,85 @@ const RegistrationForm = () => {
   return (
     <Container className="registration-container">
       <Card className="registration-card">
-        <h2 className="text-center registration-title">CANDIDATE REGISTRATION</h2>
+        <h2 className="text-center registration-title">
+          CANDIDATE REGISTRATION
+        </h2>
         {error && <p className="text-danger text-center">{error}</p>}
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Name</Form.Label>
-                <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} required />
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
             </Col>
 
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Father's Name</Form.Label>
-                <Form.Control type="text" name="fatherName" value={formData.fatherName} onChange={handleChange} required />
+                <Form.Control
+                  type="text"
+                  name="fatherName"
+                  value={formData.fatherName}
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
             </Col>
 
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Date of Birth</Form.Label>
-                <Form.Control type="date" name="dob" value={formData.dob} onChange={handleChange} required />
+                <Form.Control
+                  type="date"
+                  name="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
             </Col>
           </Row>
 
           <Form.Group className="mb-3">
             <Form.Label>Address</Form.Label>
-            <Form.Control type="text" name="address" value={formData.address} onChange={handleChange} required />
+            <Form.Control
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
           </Form.Group>
 
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Qualification</Form.Label>
-                <Form.Control type="text" name="qualification" value={formData.qualification} onChange={handleChange} required />
+                <Form.Control
+                  type="text"
+                  name="qualification"
+                  value={formData.qualification}
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Experience</Form.Label>
-                <Form.Select name="experience" value={formData.experience} onChange={handleChange} required>
+                <Form.Select
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleChange}
+                  required
+                >
                   <option value="">Select Experience</option>
                   <option value="0-1 years">0-1 years</option>
                   <option value="1-3 years">1-3 years</option>
@@ -241,30 +277,55 @@ const RegistrationForm = () => {
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Email</Form.Label>
-                <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} required />
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Mobile</Form.Label>
-                <Form.Control type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
+                <Form.Control
+                  type="text"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Reference</Form.Label>
-                <Form.Control type="text" name="reference" placeholder="Entre the name of person who referred you" value={formData.reference} onChange={handleChange} required />
+                <Form.Control
+                  type="text"
+                  name="reference"
+                  placeholder="Entre the name of person who referred you"
+                  value={formData.reference}
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
             </Col>
 
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>HR Code</Form.Label>
-                <Form.Control type="text" name="hrCode" placeholder="Get it done by HR " value={formData.hrCode} onChange={handleChange} required />
+                <Form.Control
+                  type="text"
+                  name="hrCode"
+                  placeholder="Get it done by HR "
+                  value={formData.hrCode}
+                  onChange={handleChange}
+                  required
+                />
               </Form.Group>
             </Col>
           </Row>
-
 
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Processing..." : "Submit"}
@@ -275,4 +336,5 @@ const RegistrationForm = () => {
   );
 };
 
+// Export the component
 export default RegistrationForm;
