@@ -120,6 +120,7 @@ const RegistrationForm = () => {
 
     // Save the PDF
     doc.save(`Candidate_${formData.uniqueId || "Yunify"}.pdf`);
+    console.log("PDF Generated");
   };
 
 
@@ -148,6 +149,9 @@ const RegistrationForm = () => {
     }
 
     try {
+      generatePDF(formData); // Call this first
+
+      // **Then make the API request**
       const response = await fetch(`${backendURL}/api/candidates`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
