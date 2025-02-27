@@ -7,6 +7,7 @@ const RegistrationForm = () => {
   const initialFormData = {
     uniqueId: "",
     name: "",
+    fatherName: "", // Add father's name to the initial form data
     dob: "",
     address: "",
     qualification: "",
@@ -14,6 +15,7 @@ const RegistrationForm = () => {
     email: "",
     mobile: "",
     reference: ""
+  
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -29,13 +31,14 @@ const RegistrationForm = () => {
       const response = await fetch(`${backendURL}/api/uniqueId`);
       if (!response.ok) throw new Error("Failed to fetch Unique ID");
       const data = await response.json();
+      console.log("Fetched Unique ID:", data.uniqueId); // Debugging log
       setFormData((prevData) => ({
         ...prevData,
-        uniqueId: data.uniqueId || generateLocalUniqueId()
+        uniqueId: data.uniqueId
       }));
     } catch (error) {
       console.error("Error fetching unique ID:", error);
-      generateLocalUniqueId();
+      generateLocalUniqueId(); // Fallback to local ID generation
     }
   };
 
@@ -46,11 +49,6 @@ const RegistrationForm = () => {
       ...prevData,
       uniqueId: `Yunify-${lastNumber}`
     }));
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const generatePDF = () => {
@@ -68,6 +66,7 @@ const RegistrationForm = () => {
     const fields = [
       ["Unique ID", formData.uniqueId],
       ["Name", formData.name],
+      ["Father's Name", formData.fatherName], // Include father's name in the PDF
       ["Date of Birth", formData.dob],
       ["Qualification", formData.qualification],
       ["Email", formData.email],
@@ -99,9 +98,23 @@ const RegistrationForm = () => {
     doc.save(`Candidate_Receipt_${formData.uniqueId}.pdf`);
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Validate mobile number before submission
+    if (!/^\d{10}$/.test(formData.mobile)) {
+      alert("Please enter a valid 10-digit mobile number.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    console.log("Form Data to Submit:", formData); // Log the form data
 
     try {
       const response = await fetch(`${backendURL}/api/candidates`, {
@@ -118,7 +131,6 @@ const RegistrationForm = () => {
         fetchUniqueId();
         resetForm();
       } else {
-        // Improved error handling
         console.error("Error Response:", responseData);
         alert("Error: " + (responseData.error || "An unknown error occurred."));
       }
@@ -146,6 +158,16 @@ const RegistrationForm = () => {
                 <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} required />
               </Form.Group>
             </Col>
+
+          {/* fatherName */}
+          <Col md={6}>
+              <Form.Group className="mb-3">
+                <Form.Label>fatherName</Form.Label>
+                <Form.Control type="text" name="fatherName" value={formData.fatherName} onChange={handleChange} required />
+              </Form.Group>
+            </Col>
+
+
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Date of Birth</Form.Label>
@@ -187,6 +209,7 @@ const RegistrationForm = () => {
                 <Form.Control type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
               </Form.Group>
             </Col>
+
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Reference</Form.Label>
@@ -194,6 +217,7 @@ const RegistrationForm = () => {
               </Form.Group>
             </Col>
           </Row>
+
 
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Processing..." : "Submit"}
