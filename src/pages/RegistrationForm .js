@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import jsPDF from "jspdf";
-import QRCode from 'qrcode';
 import "../css/Registration.css";
 
 const RegistrationForm = () => {
@@ -18,7 +17,6 @@ const RegistrationForm = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [amount, setAmount] = useState("");
   const backendURL = "https://backend-repo-q9e4.onrender.com";
 
   useEffect(() => {
@@ -46,50 +44,6 @@ const RegistrationForm = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const handlePayment = async () => {
-    if (!amount || amount <= 0) {
-        alert("Please enter a valid amount");
-        return;
-    }
-
-    const upiID = "salvipiyush777@ybl"; // Your UPI ID
-    const name = "Piyush Salvi"; // Your name
-    const txnId = `TXN${Date.now()}`; // Transaction ID
-    const refId = `REF${Date.now()}`; // Reference ID
-    const note = "Candidate Registration Payment"; // Payment note
-
-    // Create a UPI payment link
-    const upiURL = `upi://pay?pa=${encodeURIComponent(upiID)}&pn=${encodeURIComponent(name)}&mc=&tid=${txnId}&tr=${refId}&tn=${encodeURIComponent(note)}&am=${encodeURIComponent(amount)}&cu=INR`;
-
-    console.log("🔗 Generated UPI Link:", upiURL);
-
-    try {
-        // Generate QR code
-        const qrCodeDataUrl = await QRCode.toDataURL(upiURL);
-        
-        // Create an image element to display the QR code
-        const img = document.createElement('img');
-        img.src = qrCodeDataUrl;
-        img.alt = "Scan to pay";
-        img.style.width = "200px"; // Set the desired width
-        img.style.height = "200px"; // Set the desired height
-
-        // Append the QR code image to the body or a specific container
-        document.body.appendChild(img);
-
-        // Ask user for payment confirmation
-        const userConfirmed = window.confirm("Did you complete the payment?");
-        if (userConfirmed) {
-            handleSubmit(); // Proceed to submit the form if payment is confirmed
-        } else {
-            alert("Payment not completed. Please try again.");
-        }
-    } catch (error) {
-        console.error("Error generating QR code:", error);
-        alert("Failed to generate QR code. Please try again.");
-    }
-};
 
   const generatePDF = () => {
     const doc = new jsPDF();
@@ -137,10 +91,11 @@ const RegistrationForm = () => {
     doc.save(`Candidate_Receipt_${formData.uniqueId}.pdf`);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
     setIsSubmitting(true);
     console.log("Submitting form...");
-
+  
     try {
       console.log("Sending request to backend...");
       const response = await fetch(`${backendURL}/api/candidates`, {
@@ -148,10 +103,10 @@ const RegistrationForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData }),
       });
-
+  
       const responseData = await response.json();
       console.log("Response received:", responseData);
-
+  
       if (response.ok) {
         alert("Candidate registered successfully!");
         generatePDF(); // Generate PDF after successful registration
@@ -168,27 +123,23 @@ const RegistrationForm = () => {
           reference: ""
         });
       } else {
+        // Log the entire response for debugging
         console.error("Error Response:", responseData);
-        alert("Error: " + responseData.message);
+        alert("Error: " + (responseData.message || "An unknown error occurred."));
       }
     } catch (error) {
       console.error("Catch Error:", error);
       alert("Server error. Try again later.");
     }
-
+  
     setIsSubmitting(false);
-  };
-
-  const handleFinalSubmit = (e) => {
-    e.preventDefault();
-    handlePayment(); // Call payment function on submit
   };
 
   return (
     <Container className="registration-container">
       <Card className="registration-card">
         <h2 className="text-center registration-title">CANDIDATE REGISTRATION</h2>
-        <Form onSubmit={handleFinalSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
@@ -244,17 +195,6 @@ const RegistrationForm = () => {
               </Form.Group>
             </Col>
           </Row>
-
-          <Form.Group className="mb-3">
-            <Form.Label>Payment Amount (INR)</Form.Label>
-            <Form.Control
-              type="number"
-              name="amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              required
-            />
-          </Form.Group>
 
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Processing..." : "Submit"}
