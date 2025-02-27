@@ -268,7 +268,7 @@ const RegistrationForm = () => {
                   <option value="1-3 years">1-3 years</option>
                   <option value="3-5 years">3-5 years</option>
                   <option value="5+ years">5+ years</option>
-                  <option value="5+ years">5+ years</option>
+
 
                 </Form.Select>
               </Form.Group>
@@ -315,17 +315,19 @@ const RegistrationForm = () => {
             </Col>
 
             <Col md={6}>
-              <Form.Group className="mb-3"> <Form.Label>HR Code</Form.Label>
+              <Form.Group className="mb-3">
+                <Form.Label>HR Code</Form.Label>
                 <Form.Control
                   type="text"
                   name="hrCode"
-                  placeholder="Get it done by HR "
-                  value={formData.hrCode}
+                  placeholder="Get it done by HR"
+                  value={formData.hrCode || ""} // Ensure it doesn't throw an error if formData is undefined
                   onChange={handleChange}
                   required
                 />
               </Form.Group>
             </Col>
+
           </Row>
 
           <Button type="submit" disabled={isSubmitting}>
