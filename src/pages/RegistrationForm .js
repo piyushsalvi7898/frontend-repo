@@ -268,6 +268,8 @@ const RegistrationForm = () => {
                   <option value="1-3 years">1-3 years</option>
                   <option value="3-5 years">3-5 years</option>
                   <option value="5+ years">5+ years</option>
+                  <option value="5+ years">5+ years</option>
+
                 </Form.Select>
               </Form.Group>
             </Col>
@@ -313,8 +315,7 @@ const RegistrationForm = () => {
             </Col>
 
             <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>HR Code</Form.Label>
+              <Form.Group className="mb-3"> <Form.Label>HR Code</Form.Label>
                 <Form.Control
                   type="text"
                   name="hrCode"
