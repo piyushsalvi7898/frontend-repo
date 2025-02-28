@@ -1,98 +1,140 @@
-
-
-/* Container */
+/* 🌟 Stylish Background */
 .registration-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  background: linear-gradient(135deg, #222, #444);
 }
 
-/* Card */
+/* 🎨 Glassmorphism Card */
 .registration-card {
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   padding: 30px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease-in-out;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.7s ease-in-out;
 }
 
-/* Form Title */
+/* 🏷️ Form Title */
 .registration-title {
   text-align: center;
-  font-size: 26px;
-  font-weight: 600;
-  color: #333;
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   margin-bottom: 20px;
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.6);
 }
 
-/* Input Fields */
+/* 🖊️ Input Fields */
 .form-control {
+  width: 100%;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  transition: all 0.3s ease;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: 0.3s;
+  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .form-control:focus {
-  border-color: #007bff;
-  box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 10px white;
 }
 
-/* Labels */
+/* 🔐 Password Field */
+.form-control[type="password"] {
+  letter-spacing: 3px;
+}
+
+/* 🏷️ Labels */
 .form-label {
   font-weight: 500;
-  color: #555;
+  color: white;
+  font-size: 14px;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
 }
 
-/* Select Dropdown */
+/* 📌 Select Dropdown */
 .form-select {
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-/* Submit Button */
-.submit-btn {
   width: 100%;
+  border-radius: 8px;
+  border: none;
   padding: 12px;
   font-size: 16px;
-  font-weight: 600;
-  background: #007bff;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: 0.3s;
+}
+
+.form-select:focus {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 0px 10px white;
+}
+
+/* 🎯 Submit Button with Neon Glow */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #555, #222);
   border: none;
-  border-radius: 8px;
-  color: #fff;
-  transition: all 0.3s ease;
+  border-radius: 10px;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .submit-btn:hover {
-  background: #0056b3;
+  background: linear-gradient(135deg, #222, #555);
+  box-shadow: 0px 0px 15px white;
 }
 
-/* HR Permission Code Field */
-.form-control[type="password"] {
-  letter-spacing: 2px;
+.submit-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0px 3px 8px rgba(255, 255, 255, 0.4);
 }
 
-/* Responsive Design */
+/* 📱 Responsive Design */
 @media (max-width: 768px) {
   .registration-card {
     padding: 20px;
   }
 
   .registration-title {
-    font-size: 22px;
+    font-size: 24px;
+  }
+
+  .submit-btn {
+    font-size: 16px;
+    padding: 12px;
   }
 }
 
-/* Smooth Fade-in Animation */
+/* 🌟 Smooth Fade-in Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-15px);
   }
   to {
     opacity: 1;
