@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
+
 import "../css/Registration.css";
 
 const initialFormData = {
@@ -59,47 +60,49 @@ const RegistrationForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+
+  
   const generatePDF = (formData) => {
     if (!formData) {
       console.error("No form data available");
       return;
     }
-
+  
     const doc = new jsPDF();
-
+  
     // Get Current Date
     const currentDate = new Date().toLocaleDateString();
-
+  
     // Company Name Header
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
     doc.text("Yunify HR & IT Solutions Pvt. Ltd.", 20, 20);
-
+  
     // Subtitle
     doc.setFontSize(14);
     doc.setFont("helvetica", "normal");
     doc.text("Candidate Registration Form", 20, 30);
-
+  
     // Draw a line
     doc.setLineWidth(0.5);
     doc.line(20, 35, 190, 35);
-
+  
     // Table Data
     const tableColumn = ["Field", "Details"];
     const tableRows = [
-      ["Unique ID", formData.uniqueId || "N/A"],
-      ["Name", formData.name || "N/A"],
-      ["Address", formData.address || "N/A"],
-      ["Qualification", formData.qualification || "N/A"],
-      ["Experience", formData.experience || "N/A"],
-      ["Email", formData.email || "N/A"],
-      ["Mobile", formData.mobile || "N/A"],
-      ["Reference", formData.reference || "N/A"],
+      ["Unique ID", formData?.uniqueId || "N/A"],
+      ["Name", formData?.name || "N/A"],
+      ["Address", formData?.address || "N/A"],
+      ["Qualification", formData?.qualification || "N/A"],
+      ["Experience", formData?.experience || "N/A"],
+      ["Email", formData?.email || "N/A"],
+      ["Mobile", formData?.mobile || "N/A"],
+      ["Reference", formData?.reference || "N/A"],
       ["Registration Date", currentDate], // Added Registration Date
     ];
-
-    // Generate Table
-    doc.autoTable({
+  
+    // Generate Table using autoTable
+    autoTable(doc, {
       head: [tableColumn],
       body: tableRows,
       startY: 40,
@@ -107,9 +110,9 @@ const RegistrationForm = () => {
       styles: { fontSize: 12, cellPadding: 3 },
       headStyles: { fillColor: [0, 102, 204], textColor: [255, 255, 255] }, // Blue header with white text
     });
-
+  
     // Footer Content
-    const finalY = doc.lastAutoTable.finalY + 10 || 100;
+    const finalY = doc.lastAutoTable?.finalY + 10 || 100;
     doc.setFontSize(12);
     doc.setFont("helvetica", "bold");
     doc.text(
@@ -117,18 +120,17 @@ const RegistrationForm = () => {
       20,
       finalY + 10
     );
-
+  
     doc.setFont("helvetica", "normal");
-    doc.text(
-      "For any queries, contact us at support@yunifyhr.com",
-      20,
-      finalY + 20
-    );
-
-    // Save the PDF
-    doc.save(`Candidate_${formData.uniqueId || "Yunify"}.pdf`);
-    console.log("PDF Generated");
+    doc.text("For any queries, contact us at support@yunifyhr.com", 20, finalY + 20);
+  
+    // Save the PDF with a proper filename
+    const fileName = `Candidate_${formData?.uniqueId || "Yunify"}.pdf`;
+    doc.save(fileName);
+    
+    console.log(`PDF Generated: ${fileName}`);
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -151,7 +153,7 @@ const RegistrationForm = () => {
       return;
     }
 
-    
+
     try {
       const response = await fetch(`${backendURL}/api/candidates`, {
         method: "POST",
