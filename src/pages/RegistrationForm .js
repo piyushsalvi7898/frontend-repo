@@ -61,32 +61,37 @@ const RegistrationForm = () => {
   };
 
 
-  
+
   const generatePDF = (formData) => {
     if (!formData) {
       console.error("No form data available");
       return;
     }
-  
+
     const doc = new jsPDF();
-  
+
     // Get Current Date
     const currentDate = new Date().toLocaleDateString();
-  
-    // Company Name Header
+    // Set text color to red for the header
+    doc.setTextColor(255, 0, 0);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
-    doc.text("Yunify HR & IT Solutions Pvt. Ltd.", 20, 20);
-  
-    // Subtitle
+
+    // Center align the company name
+    doc.text("Yunify HR & IT Solutions Pvt. Ltd.", doc.internal.pageSize.width / 2, 20, { align: "center" });
+
+    // Subtitle in black, normal font
+    doc.setTextColor(0, 0, 0);
     doc.setFontSize(14);
     doc.setFont("helvetica", "normal");
-    doc.text("Candidate Registration Form", 20, 30);
-  
+
+    // Center align the subtitle
+    doc.text("Candidate Registration Form", doc.internal.pageSize.width / 2, 30, { align: "center" });
+
     // Draw a line
     doc.setLineWidth(0.5);
     doc.line(20, 35, 190, 35);
-  
+
     // Table Data
     const tableColumn = ["Field", "Details"];
     const tableRows = [
@@ -100,7 +105,7 @@ const RegistrationForm = () => {
       ["Reference", formData?.reference || "N/A"],
       ["Registration Date", currentDate], // Added Registration Date
     ];
-  
+
     // Generate Table using autoTable
     autoTable(doc, {
       head: [tableColumn],
@@ -110,7 +115,7 @@ const RegistrationForm = () => {
       styles: { fontSize: 12, cellPadding: 3 },
       headStyles: { fillColor: [0, 102, 204], textColor: [255, 255, 255] }, // Blue header with white text
     });
-  
+
     // Footer Content
     const finalY = doc.lastAutoTable?.finalY + 10 || 100;
     doc.setFontSize(12);
@@ -120,32 +125,32 @@ const RegistrationForm = () => {
       20,
       finalY + 10
     );
-  
+
     doc.setFont("helvetica", "normal");
     doc.text("For any queries, contact us at support@yunifyhr.com", 20, finalY + 20);
-  
+
     // Save the PDF with a proper filename
     const fileName = `Candidate_${formData?.uniqueId || "Yunify"}.pdf`;
     doc.save(fileName);
-    
+
     console.log(`PDF Generated: ${fileName}`);
   };
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError("");
-  
+
     console.log("Form Data before submission:", formData); // Debugging
-  
+
     // Validate HR Code
     if (formData.hrCode !== HR_SECRET_CODE) {
       setError("Invalid HR Code! Please enter the correct code.");
       setIsSubmitting(false);
       return;
     }
-  
+
     // Validate mobile number
     if (!/^\d{10}$/.test(formData.mobile)) {
       setError("Please enter a valid 10-digit mobile number.");
@@ -160,9 +165,9 @@ const RegistrationForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-    
+
       console.log("Response status:", response.status); // Debugging
-    
+
       let responseData;
       try {
         responseData = await response.json(); // ✅ Ensure JSON parsing
@@ -171,9 +176,9 @@ const RegistrationForm = () => {
         setError("Invalid server response. Please try again.");
         return;
       }
-    
+
       console.log("Response data:", responseData);
-    
+
       if (response.ok) {
         alert("Candidate registered successfully!");
         generatePDF(formData); // ✅ Call only once after success
@@ -188,10 +193,10 @@ const RegistrationForm = () => {
     } finally {
       setIsSubmitting(false);
     }
-    
-  
+
+
   };
-  
+
 
   const resetForm = () => {
     setFormData(initialFormData);
