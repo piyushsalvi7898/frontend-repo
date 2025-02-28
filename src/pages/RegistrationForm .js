@@ -46,14 +46,19 @@ const RegistrationForm = () => {
     }
   };
 
+
   const generateLocalUniqueId = () => {
-    const lastId = "Yunify-10000";
-    const lastNumber = parseInt(lastId.split("-")[1]) + 1;
-    setFormData((prevData) => ({
-      ...prevData,
-      uniqueId: `Yunify-${lastNumber}`,
-    }));
+    setFormData((prevData) => {
+      const lastId = prevData.uniqueId || "Yunify-10000"; // Use existing ID or default
+      const lastNumber = parseInt(lastId.split("-")[1]) + 1;
+      
+      return {
+        ...prevData,
+        uniqueId: `Yunify-${lastNumber}`,
+      };
+    });
   };
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -127,7 +132,10 @@ const RegistrationForm = () => {
     );
 
     doc.setFont("helvetica", "normal");
-    doc.text("For any queries, contact us at support@yunifyhr.com", 20, finalY + 20);
+    doc.text("For any queries, contact us at contact@yunify.in", 20, finalY + 20);
+    doc.text("For any queries, contact us at: +91 94248-06680", 20, finalY + 20);
+
+
 
     // Save the PDF with a proper filename
     const fileName = `Candidate_${formData?.uniqueId || "Yunify"}.pdf`;
@@ -137,66 +145,134 @@ const RegistrationForm = () => {
   };
 
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+  //   setError("");
+
+  //   console.log("Form Data before submission:", formData); // Debugging
+
+  //   // Validate HR Code
+  //   if (formData.hrCode !== HR_SECRET_CODE) {
+  //     setError("Invalid HR Code! Please enter the correct code.");
+  //     setIsSubmitting(false);
+  //     return;
+  //   }
+
+  //   // Validate mobile number
+  //   if (!/^\d{10}$/.test(formData.mobile)) {
+  //     setError("Please enter a valid 10-digit mobile number.");
+  //     setIsSubmitting(false);
+  //     return;
+  //   }
+
+
+  //   try {
+  //     const response = await fetch(`${backendURL}/api/candidates`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(formData),
+  //     });
+
+  //     console.log("Response status:", response.status); // Debugging
+
+  //     let responseData;
+  //     try {
+  //       responseData = await response.json(); // ✅ Ensure JSON parsing
+  //     } catch (jsonError) {
+  //       console.error("JSON Parse Error:", jsonError);
+  //       setError("Invalid server response. Please try again.");
+  //       return;
+  //     }
+
+  //     console.log("Response data:", responseData);
+
+  //     if (response.ok) {
+  //       alert("Candidate registered successfully!");
+
+  //       generatePDF(formData); // ✅ Call only once after success
+
+  //       await fetchUniqueId();
+
+  //       resetForm();
+  //     } else {
+  //       setError(responseData.error || "An unknown error occurred.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Fetch error:", error);
+  //     setError("Server error. Try again later.");
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+
+
+  // };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError("");
-
+  
     console.log("Form Data before submission:", formData); // Debugging
-
-    // Validate HR Code
+  
+    // ✅ Validate HR Code
     if (formData.hrCode !== HR_SECRET_CODE) {
       setError("Invalid HR Code! Please enter the correct code.");
       setIsSubmitting(false);
       return;
     }
-
-    // Validate mobile number
+  
+    // ✅ Validate mobile number (10 digits)
     if (!/^\d{10}$/.test(formData.mobile)) {
       setError("Please enter a valid 10-digit mobile number.");
       setIsSubmitting(false);
       return;
     }
-
-
+  
     try {
       const response = await fetch(`${backendURL}/api/candidates`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+  
       console.log("Response status:", response.status); // Debugging
-
+  
+      // ✅ Attempt to parse response JSON safely
       let responseData;
       try {
-        responseData = await response.json(); // ✅ Ensure JSON parsing
+        responseData = await response.json();
       } catch (jsonError) {
         console.error("JSON Parse Error:", jsonError);
         setError("Invalid server response. Please try again.");
         return;
       }
-
+  
       console.log("Response data:", responseData);
-
+  
       if (response.ok) {
-        alert("Candidate registered successfully!");
-        generatePDF(formData); // ✅ Call only once after success
-        fetchUniqueId();
+        alert(" Candidate registered successfully!");
+  
+        //  Fetch new Unique ID **before** resetting the form
+        await fetchUniqueId();
+  
+        //  Generate PDF **after** ensuring data is saved
+        generatePDF(formData);
+  
+        //  Reset the form properly
         resetForm();
       } else {
         setError(responseData.error || "An unknown error occurred.");
       }
     } catch (error) {
       console.error("Fetch error:", error);
-      setError("Server error. Try again later.");
+      setError(" Server error. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
-
-
   };
-
+  
 
   const resetForm = () => {
     setFormData(initialFormData);
@@ -340,15 +416,16 @@ const RegistrationForm = () => {
               <Form.Group className="mb-3">
                 <Form.Label>HR Code</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="password" // Changed to password type
                   name="hrCode"
                   placeholder="Get it done by HR"
-                  value={formData.hrCode || ""} // Ensure it doesn't throw an error if formData is undefined
+                  value={formData.hrCode || ""}
                   onChange={handleChange}
                   required
                 />
               </Form.Group>
             </Col>
+
 
           </Row>
 
