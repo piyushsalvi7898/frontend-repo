@@ -132,7 +132,7 @@ const RegistrationForm = () => {
     );
 
     doc.setFont("helvetica", "normal");
-    doc.text("For any queries, contact us at contact@yunify.in", 20, finalY + 20);
+    // doc.text("For any queries, contact us at contact@yunify.in", 20, finalY + 20);
     doc.text("For any queries, contact us at: +91 94248-06680", 20, finalY + 20);
 
 
@@ -143,70 +143,6 @@ const RegistrationForm = () => {
 
     console.log(`PDF Generated: ${fileName}`);
   };
-
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsSubmitting(true);
-  //   setError("");
-
-  //   console.log("Form Data before submission:", formData); // Debugging
-
-  //   // Validate HR Code
-  //   if (formData.hrCode !== HR_SECRET_CODE) {
-  //     setError("Invalid HR Code! Please enter the correct code.");
-  //     setIsSubmitting(false);
-  //     return;
-  //   }
-
-  //   // Validate mobile number
-  //   if (!/^\d{10}$/.test(formData.mobile)) {
-  //     setError("Please enter a valid 10-digit mobile number.");
-  //     setIsSubmitting(false);
-  //     return;
-  //   }
-
-
-  //   try {
-  //     const response = await fetch(`${backendURL}/api/candidates`, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     console.log("Response status:", response.status); // Debugging
-
-  //     let responseData;
-  //     try {
-  //       responseData = await response.json(); // ✅ Ensure JSON parsing
-  //     } catch (jsonError) {
-  //       console.error("JSON Parse Error:", jsonError);
-  //       setError("Invalid server response. Please try again.");
-  //       return;
-  //     }
-
-  //     console.log("Response data:", responseData);
-
-  //     if (response.ok) {
-  //       alert("Candidate registered successfully!");
-
-  //       generatePDF(formData); // ✅ Call only once after success
-
-  //       await fetchUniqueId();
-
-  //       resetForm();
-  //     } else {
-  //       setError(responseData.error || "An unknown error occurred.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Fetch error:", error);
-  //     setError("Server error. Try again later.");
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-
-
-  // };
 
 
   const handleSubmit = async (e) => {
