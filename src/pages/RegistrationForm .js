@@ -134,14 +134,16 @@ const RegistrationForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setError("");
-
+  
+    console.log("Form Data before submission:", formData); // Debugging
+  
     // Validate HR Code
     if (formData.hrCode !== HR_SECRET_CODE) {
       setError("Invalid HR Code! Please enter the correct code.");
       setIsSubmitting(false);
       return;
     }
-
+  
     // Validate mobile number
     if (!/^\d{10}$/.test(formData.mobile)) {
       setError("Please enter a valid 10-digit mobile number.");
@@ -149,32 +151,45 @@ const RegistrationForm = () => {
       return;
     }
 
+    
     try {
-      generatePDF(formData); // Call this first
-
-      // **Then make the API request**
       const response = await fetch(`${backendURL}/api/candidates`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
-      const responseData = await response.json();
-
+    
+      console.log("Response status:", response.status); // Debugging
+    
+      let responseData;
+      try {
+        responseData = await response.json(); // ✅ Ensure JSON parsing
+      } catch (jsonError) {
+        console.error("JSON Parse Error:", jsonError);
+        setError("Invalid server response. Please try again.");
+        return;
+      }
+    
+      console.log("Response data:", responseData);
+    
       if (response.ok) {
         alert("Candidate registered successfully!");
-        generatePDF(formData); // Pass the formData
+        generatePDF(formData); // ✅ Call only once after success
         fetchUniqueId();
         resetForm();
       } else {
         setError(responseData.error || "An unknown error occurred.");
       }
     } catch (error) {
+      console.error("Fetch error:", error);
       setError("Server error. Try again later.");
     } finally {
       setIsSubmitting(false);
     }
+    
+  
   };
+  
 
   const resetForm = () => {
     setFormData(initialFormData);
