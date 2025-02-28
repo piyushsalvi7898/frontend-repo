@@ -51,14 +51,14 @@ const RegistrationForm = () => {
     setFormData((prevData) => {
       const lastId = prevData.uniqueId || "Yunify-10000"; // Use existing ID or default
       const lastNumber = parseInt(lastId.split("-")[1]) + 1;
-      
+
       return {
         ...prevData,
         uniqueId: `Yunify-${lastNumber}`,
       };
     });
   };
-  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -149,32 +149,32 @@ const RegistrationForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setError("");
-  
+
     console.log("Form Data before submission:", formData); // Debugging
-  
+
     // ✅ Validate HR Code
     if (formData.hrCode !== HR_SECRET_CODE) {
       setError("Invalid HR Code! Please enter the correct code.");
       setIsSubmitting(false);
       return;
     }
-  
+
     // ✅ Validate mobile number (10 digits)
     if (!/^\d{10}$/.test(formData.mobile)) {
       setError("Please enter a valid 10-digit mobile number.");
       setIsSubmitting(false);
       return;
     }
-  
+
     try {
       const response = await fetch(`${backendURL}/api/candidates`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-  
+
       console.log("Response status:", response.status); // Debugging
-  
+
       // ✅ Attempt to parse response JSON safely
       let responseData;
       try {
@@ -184,18 +184,18 @@ const RegistrationForm = () => {
         setError("Invalid server response. Please try again.");
         return;
       }
-  
+
       console.log("Response data:", responseData);
-  
+
       if (response.ok) {
         alert(" Candidate registered successfully!");
-  
+
         //  Fetch new Unique ID **before** resetting the form
         await fetchUniqueId();
-  
+
         //  Generate PDF **after** ensuring data is saved
         generatePDF(formData);
-  
+
         //  Reset the form properly
         resetForm();
       } else {
@@ -208,7 +208,7 @@ const RegistrationForm = () => {
       setIsSubmitting(false);
     }
   };
-  
+
 
   const resetForm = () => {
     setFormData(initialFormData);
@@ -365,9 +365,10 @@ const RegistrationForm = () => {
 
           </Row>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" variant="custom" className="submitbutton" disabled={isSubmitting}>
             {isSubmitting ? "Processing..." : "Submit"}
           </Button>
+
         </Form>
       </Card>
     </Container>

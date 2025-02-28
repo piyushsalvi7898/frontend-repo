@@ -1,24 +1,24 @@
-/* 🌟 Stylish Background */
+/* 🌟 Background with Soft Contrast */
 .registration-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background: linear-gradient(135deg, #222, #444);
+  background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
 }
 
-/* 🎨 Glassmorphism Card */
+/* 🎨 Glassmorphism 3D Card */
 .registration-card {
   width: 100%;
   max-width: 500px;
   padding: 30px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 15px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1), -10px -10px 20px rgba(255, 255, 255, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   animation: fadeIn 0.7s ease-in-out;
 }
 
@@ -27,108 +27,107 @@
   text-align: center;
   font-size: 28px;
   font-weight: bold;
-  color: white;
+  color: #444;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 20px;
-  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.6);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* 🖊️ Input Fields */
+/* 🖊️ 3D Input Fields with Border */
+/* 🖊️ 3D Input Fields with Enhanced Color */
 .form-control {
   width: 100%;
-  border-radius: 8px;
-  border: none;
+  border-radius: 10px;
+  border: 2px solid #b0b0b0; /* 👈 Soft Grey Border */
   padding: 12px;
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: #e0e0e0; /* 👈 Light Grey Background for 3D Effect */
+  color: #333;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), 
+              -4px -4px 8px rgba(255, 255, 255, 0.8), 
+              inset 3px 3px 5px rgba(0, 0, 0, 0.1), 
+              inset -3px -3px 5px rgba(255, 255, 255, 1);
   transition: 0.3s;
-  box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.3);
   outline: none;
 }
 
+/* ✨ Placeholder Styling */
 .form-control::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 0, 0, 0.5);
 }
 
+/* 🔥 Focus Effect - More Depth */
 .form-control:focus {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0px 0px 10px white;
+  border: 2px solid #888; /* 👈 Darker Grey Border */
+  background: #d6d6d6; /* 👈 Slightly Darker Background */
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.25), 
+              -3px -3px 7px rgba(255, 255, 255, 0.9), 
+              inset 2px 2px 4px rgba(0, 0, 0, 0.2), 
+              inset -2px -2px 4px rgba(255, 255, 255, 1);
 }
 
-/* 🔐 Password Field */
-.form-control[type="password"] {
-  letter-spacing: 3px;
-}
 
 /* 🏷️ Labels */
 .form-label {
-  font-weight: 500;
-  color: white;
+  font-weight: 600;
+  color: #555;
   font-size: 14px;
-  text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.6);
 }
 
-/* 📌 Select Dropdown */
-.form-select {
-  width: 100%;
-  border-radius: 8px;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  transition: 0.3s;
-}
 
-.form-select:focus {
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0px 0px 10px white;
-}
-
-/* 🎯 Submit Button with Neon Glow */
-.submit-btn {
-  width: 100%;
+.submitbutton {
+  width: 50%;
   padding: 14px;
   font-size: 18px;
   font-weight: bold;
-  background: linear-gradient(135deg, #555, #222);
-  border: none;
-  border-radius: 10px;
-  color: white;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a); /* 👈 Dark Gradient */
+  border: 3px solid #555; /* 👈 Darker Border */
+  border-radius: 12px;
+  color: #ddd; /* 👈 Light Text for Contrast */
   transition: 0.3s;
   cursor: pointer;
-  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.3);
+  position: relative;
+  
+  /* ✅ Center Button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto; /* 👈 This centers it horizontally */
+  
+  /* 🚀 Dark Mode Shadows for 4D Look */
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.7), 
+              -6px -6px 15px rgba(100, 100, 100, 0.2), 
+              inset 3px 3px 7px rgba(0, 0, 0, 0.6), 
+              inset -3px -3px 7px rgba(100, 100, 100, 0.2);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
-.submit-btn:hover {
-  background: linear-gradient(135deg, #222, #555);
-  box-shadow: 0px 0px 15px white;
+/* 🔥 Hover Effect - More Glow & Depth */
+.submitbutton:hover {
+  background: linear-gradient(135deg, #3a3a3a, #4a4a4a);
+  border-color: #777; /* 👈 More Defined Border */
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8), 
+              -3px -3px 12px rgba(100, 100, 100, 0.3), 
+              inset 2px 2px 5px rgba(0, 0, 0, 0.5), 
+              inset -2px -2px 5px rgba(100, 100, 100, 0.3);
 }
 
-.submit-btn:active {
-  transform: scale(0.95);
-  box-shadow: 0px 3px 8px rgba(255, 255, 255, 0.4);
+/* 🔥 Active (Pressed) Effect - Realistic Press */
+.submitbutton:active {
+  transform: scale(0.96);
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.7), 
+              inset -4px -4px 8px rgba(100, 100, 100, 0.3);
 }
 
-/* 📱 Responsive Design */
-@media (max-width: 768px) {
-  .registration-card {
-    padding: 20px;
-  }
 
-  .registration-title {
-    font-size: 24px;
-  }
 
-  .submit-btn {
-    font-size: 16px;
-    padding: 12px;
-  }
-}
+
+
+
+
+
 
 /* 🌟 Smooth Fade-in Animation */
 @keyframes fadeIn {
