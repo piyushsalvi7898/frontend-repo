@@ -1,6 +1,7 @@
 /* Dashboard.css */
 
 .Dashboard-container {
+    margin-top: 80px;
     padding: 20px; /* Padding around the container */
     background-color: #f9f9f9; /* Light background color for the container */
 }
@@ -52,6 +53,7 @@
     border-radius: 10px; /* Rounded corners */
     display: flex;
     justify-content: center;
+    margin-top: 80px; /* Space above the form */
     /* border: #007bff 5px; */
     align-items: center;
     height: 80vh; /* Full viewport height */

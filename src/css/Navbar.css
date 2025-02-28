@@ -1,154 +1,101 @@
+/* ================= Navbar Styling ================= */
 .navbar {
-    display: flex;
-    justify-content: space-between; /* Ensures spacing between elements */
-    align-items: center; /* Center items vertically */
-    background-color: #333;
-    color: white;
-    padding: 10px 20px; /* Adjusted padding */
-    font-size: 15px;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-}
-
-/* Ensure the navbar items stay aligned */
-.navbar .nav-items {
+    background: linear-gradient(135deg, #1f1c2c, #302b63, #24243e); /* Futuristic dark gradient */
+    padding: 12px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     display: flex;
     align-items: center;
-    gap: 15px; /* Adds space between nav items */
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.4s ease-in-out;
+    
+
 }
 
-/* Ensure the button stays aligned */
-.navbar .nav-button {
-    margin-left: auto; /* Pushes button to the right */
-}
-
-.navbar-title {
-    margin-right: 15px; /* Space between title and image */
-}
-
+/* Logo or Brand Image */
 .home-image2 {
-    height: 30px;
-    width: 100px;
+    height: 55px;
+    width: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
 }
 
-
-
-.backgroundclronhover {
-    color: white; /* Default text color */
-    text-decoration: none; /* Remove underline */
-    transition: background-color 0.3s, color 0.3s, border-radius 0.3s; /* Smooth transition for background, text color, and border radius */
-    padding: 0px 10px; /* Add padding for better appearance */
-    border-radius: 5px; /* Default border radius */
+.home-image2:hover {
+    transform: rotate(5deg) scale(1.1);
 }
 
-.backgroundclronhover:hover {
-    background-color: rgb(208, 223, 236); /* Background color on hover */
-    color: #333; /* Text color on hover */
-    border-radius: 10px; /* Increase border radius on hover for a more pronounced effect */
+/* Navbar Links */
+.navbar-nav .nav-link {
+    color: #FFFFFF !important;
+    font-weight: 600;
+    font-size: 17px;
+    margin-right: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 
-
-.navbar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0; /* Added margin reset */
-    display: flex; /* Use flexbox for horizontal layout */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+/* Neon Hover Effect */
+.navbar-nav .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #ff00ff; /* Neon Pink */
+    transition: all 0.4s ease-in-out;
 }
 
-.navbar ul li {
-    margin: 0 10px; /* Adjusted margin for smaller spacing */
+.navbar-nav .nav-link:hover::before {
+    width: 100%;
+    left: 0;
 }
 
-.navbar ul li a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s; /* Smooth transition for color change */
+.navbar-nav .nav-link:hover {
+    color: #00FFD1 !important; /* Neon Cyan */
+    transform: translateY(-3px);
 }
 
-/* Existing styles remain unchanged */
-.menu-toggle {
-    display: none; /* Hide the button by default */
-    background-color: #007BFF; /* Button background color */
-    color: white; /* Text color */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 5px 20px; /* Padding for size */
-    font-size: 15px; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: bacground-color 0.3s, transform 0.2s; /* Smooth transitions */
-   
+/* Active Link */
+.navbar-nav .nav-link.active {
+    background: #00ADB5;
+    color: #000 !important;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 173, 181, 0.8);
 }
 
-.menu-toggle:hover {
-    background-color: #0056b3; /* Darker background on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+/* Navbar Toggle Button */
+.navbar-toggler {
+    border: none;
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
 }
 
-.menu-toggle:focus {
-    outline: none; /* Remove outline on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow effect */
+.navbar-toggler:hover {
+    background: #00ADB5;
+    transform: scale(1.1);
 }
 
-/* Show the button on smaller screens */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block; /* Show the button */
-        margin-left: auto; /* Align to the right */
+/* Mobile Menu Styling */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: rgba(31, 28, 44, 0.9);
+        padding: 15px;
+        border-radius: 10px;
     }
 
-    .navbar ul {
-        display: none; /* Hide the menu by default */
-        flex-direction: column; /* Stack links vertically */
-        width: 100%; /* Full width for the links */
+    .navbar-nav .nav-link {
+        display: block;
+        text-align: center;
+        margin: 10px 0;
     }
-
-    .navbar ul.open {
-        display: flex; /* Show the menu when open */
-    }
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column; /* Stack items vertically on smaller screens */
-        align-items: flex-start; /* Align items to the start */
-    }
-
-    .navbar-title {
-        margin-bottom: 10px; /* Space below the title */
-    }
-
-    .navbar ul {
-        flex-direction: column; /* Stack links vertically */
-        width: 100%; /* Full width for the links */
-    }
-
-    .navbar ul li {
-        margin: 5px 0; /* Space between links */
-        width: 100%; /* Full width for each link */
-        text-align: center; /* Center text for links */
-    }
-}
-
-@media (max-width: 480px) {
-    .navbar {
-        padding: 5px; /* Reduce padding on very small screens */
-    }
-
-    .navbar-title {
-        font-size: 14px; /* Smaller font size for the title */
-    }
-
-    .navbar ul li a {
-        font-size: 14px; /* Smaller font size for links */
-    }
-}
-
-
-
-.navbar ul li a.active {
-    background-color: rgb(208, 223, 236); /* Same as hover background */
-    color: #333; /* Text color on active link */
-    border-radius:20px; /* Rounded effect */
-    padding: 1px 10px; /* Padding for visibility */
 }
