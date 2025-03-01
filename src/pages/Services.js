@@ -99,7 +99,7 @@ const Services = () => {
           </p>
         </div>
         <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">NBFC Hirinng</p>
+          <p className="bigheadinginmaincontent">NBFC Hiring</p>
           <p className="logo-content">
             Yunify is an emerging platform that partners with Non-Banking
             Financial Companies (NBFCs) to offer dynamic hiring solutions. With
@@ -127,7 +127,7 @@ const Services = () => {
           </p>
         </div>
         <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">Retail Loyalty programme</p>
+          <p className="bigheadinginmaincontent"> Retail Loyalty Program</p>
           <p className="logo-content">
             Yunify Deliver for Retail Loyalty Programs is a service designed to
             enhance the delivery experience for customers involved in retail
@@ -140,7 +140,7 @@ const Services = () => {
           </p>
         </div>
         <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">labour Contract</p>
+          <p className="bigheadinginmaincontent">Labour Contract</p>
           <p className="logo-content">
             Yunify Manage Labour Contract is a comprehensive solution designed
             to streamline the management of labor contracts. It helps
@@ -164,7 +164,7 @@ const Services = () => {
           </p>
         </div>
         <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">Telecommunication</p>
+          <p className="bigheadinginmaincontent"> Telecommunications </p>
           <p className="logo-content">
             Yunify Provide for Telecommunications is a solution designed to
             streamline the delivery and management of telecom services. It
@@ -200,7 +200,7 @@ const Services = () => {
           </p>
         </div>
         <div className="service-consultant-box">
-          <p className="bigheadinginmaincontent">Content creating</p>
+          <p className="bigheadinginmaincontent">Content Creation</p>
           <p className="logo-content">
             Yunify Deliver offers comprehensive content creation services
             designed to produce high-quality, engaging content for businesses.

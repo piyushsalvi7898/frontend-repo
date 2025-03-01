@@ -189,25 +189,26 @@ const Home = () => {
           <img src={bpo1} alt="Description of image" className="logo-image" />
           <p className="bigheadinginmaincontent">Salesforce Solutions</p>
           <p className="logo-content">
-            Yunify offers expert sales force outsourcing services, providing
+            Yunify offers expert Salesforce outsourcing services, providing
             businesses with trained professionals who drive sales, nurture
             client relationships, and boost revenue. With a focus on efficiency
             and results, Yunify helps companies expand their reach and
             streamline their sales processes, all while reducing
-            operational costs.
+            operational costs.
           </p>
         </div>
         <div className="bpo-consultant-box">
           <img src={bpo2} alt="Description of image" className="logo-image" />
+          <p className="bigheadinginmaincontent">Recruitment Agency</p>
           <p className="logo-content">
-            <p className="bigheadinginmaincontent">Recruitment Agency</p>
             Yunify offers comprehensive recruitment services, helping businesses
             find the right talent for their needs. From sourcing and screening
             candidates to handling the entire hiring process, Yunify ensures you
-            build a skilled and dedicated team that aligns with your company’s
+            build a skilled and dedicated team that aligns with your company's
             goals and culture.
           </p>
         </div>
+
         <div className="bpo-consultant-box">
           <img src={bpo3} alt="Description of image" className="logo-image" />
           <p className="bigheadinginmaincontent">Digital Marketing Solutions</p>
@@ -222,8 +223,9 @@ const Home = () => {
         </div>
         <div className="bpo-consultant-box">
           <img src={bpo4} alt="Description of image" className="logo-image" />
+          <p className="bigheadinginmaincontent"> Website Solutions </p>
           <p className="logo-content">
-            <p className="bigheadinginmaincontent"> Website Solutions </p>
+
             Yunify offers innovative website solutions that combine design,
             functionality, and performance to deliver seamless user experiences.
             From custom-built websites to eCommerce platforms, Yunify ensures

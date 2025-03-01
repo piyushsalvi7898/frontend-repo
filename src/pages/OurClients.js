@@ -161,7 +161,7 @@ const OurClients = () => {
           </div>
 
           <div className="service-consultant-box">
-            <p className="bigheadinginmaincontent">NBFC Hirinng</p>
+            <p className="bigheadinginmaincontent">NBFC Hiring</p>
             <p className="logo-content">
               Yunify is an emerging platform that partners with Non-Banking
               Financial Companies (NBFCs) to offer dynamic hiring solutions. With
