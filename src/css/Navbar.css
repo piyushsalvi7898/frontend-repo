@@ -1,101 +1,84 @@
-/* ================= Navbar Styling ================= */
-.navbar {
-    background: linear-gradient(135deg, #1f1c2c, #302b63, #24243e); /* Futuristic dark gradient */
-    padding: 12px 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    transition: all 0.4s ease-in-out;
-    
-
+/* Smooth transition for navbar */
+.animated-navbar {
+  transform: translateY(-20px);
+  opacity: 0;
+  transition:
+    transform 0.5s ease-out,
+    opacity 0.5s ease-in-out;
+  pointer-events: none;
 }
 
-/* Logo or Brand Image */
-.home-image2 {
-    height: 55px;
-    width: auto;
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
+.animated-navbar.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.home-image2:hover {
-    transform: rotate(5deg) scale(1.1);
+/* Custom Navbar Background - Light Black Theme */
+.custom-navbar {
+  background: #333; /* Light Black Gradient */
+  padding: 12px 25px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Navbar Links */
-.navbar-nav .nav-link {
-    color: #FFFFFF !important;
-    font-weight: 600;
-    font-size: 17px;
-    margin-right: 20px;
-    padding: 10px 15px;
-    border-radius: 8px;
-    text-transform: uppercase;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    overflow: hidden;
+.custom-navbar .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important; /* Light Grayish White */
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+  text-align: center;
 }
 
-/* Neon Hover Effect */
-.navbar-nav .nav-link::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background: #ff00ff; /* Neon Pink */
-    transition: all 0.4s ease-in-out;
+/* Hover Effect - Center Line */
+.custom-navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background: gray; /* Yellow Underline */
+  left: 50%;
+  bottom: -5px;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
-.navbar-nav .nav-link:hover::before {
-    width: 100%;
-    left: 0;
+.custom-navbar .nav-link:hover {
+  color: red !important; /* Yellow text on hover */
+  transform: scale(1.05);
 }
 
-.navbar-nav .nav-link:hover {
-    color: #00FFD1 !important; /* Neon Cyan */
-    transform: translateY(-3px);
+.custom-navbar .nav-link:hover::after {
+  width: 100%;
 }
 
-/* Active Link */
-.navbar-nav .nav-link.active {
-    background: #00ADB5;
-    color: #000 !important;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 173, 181, 0.8);
+/* Active Link Effect */
+.custom-navbar .nav-link.active {
+  /* color: green!important; */
+  font-weight: bold;
+  color: red !important; /* Yellow text on hover */
+  /* font-size: 20px; */
+}
+/* Custom Toggler Animation */
+.custom-toggler {
+  border: none !important;
+  transition: transform 0.3s ease-in-out;
+  background: none;
 }
 
-/* Navbar Toggle Button */
-.navbar-toggler {
-    border: none;
-    background: #fff;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
+.custom-toggler.open {
+  transform: rotate(90deg);
 }
 
-.navbar-toggler:hover {
-    background: #00ADB5;
-    transform: scale(1.1);
-}
-
-/* Mobile Menu Styling */
-@media (max-width: 991px) {
-    .navbar-collapse {
-        background: rgba(31, 28, 44, 0.9);
-        padding: 15px;
-        border-radius: 10px;
-    }
-
-    .navbar-nav .nav-link {
-        display: block;
-        text-align: center;
-        margin: 10px 0;
-    }
+/* Ensure Navbar Links are Visible on Full Screen */
+@media (min-width: 992px) {
+  .animated-navbar {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    display: flex !important;
+  }
 }

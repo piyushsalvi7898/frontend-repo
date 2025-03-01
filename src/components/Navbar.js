@@ -3,19 +3,27 @@ import { Link, useLocation } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import myImage from '../assets/images/myImage.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/Navbar.css'; // Keep your custom styles if needed
+import '../css/Navbar.css'; // Keep your custom styles
 
 const NavbarComponent = () => {
     const location = useLocation();
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Navbar expand="lg" bg="light" variant="light" className="px-3">
+        <Navbar expand="lg" className="custom-navbar px-3">
             <Container>
                 <Navbar.Brand as={Link} to="/">
                     <img src={myImage} alt="Logo" className="home-image2" style={{ height: '40px' }} />
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbar-nav" />
-                <Navbar.Collapse id="navbar-nav">
+                <Navbar.Toggle 
+                    aria-controls="navbar-nav" 
+                    className={`custom-toggler ${isOpen ? 'open' : ''}`}
+                    onClick={() => setIsOpen(!isOpen)}
+                />
+                <Navbar.Collapse 
+                    id="navbar-nav" 
+                    className={`animated-navbar ${isOpen ? 'show' : ''}`}
+                >
                     <Nav className="ms-auto">
                         <Nav.Link as={Link} className={location.pathname === "/" ? "active" : ""} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} className={location.pathname === "/services" ? "active" : ""} to="/services">Services</Nav.Link>

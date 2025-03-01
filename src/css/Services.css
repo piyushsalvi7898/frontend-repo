@@ -5,14 +5,12 @@
     justify-content: center;
     gap: 20px; /* Adjusted spacing */
     background-color: #dddcdc;
-    margin-top: 60px; 
+    margin-top: 0px; 
     padding: 20px;
     box-shadow: 0 4px 10px rgba(44, 62, 80, 0.3);
 }
 
-.our-services-section{
-    margin-top: 70px;
-}
+
 
 
 
