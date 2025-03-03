@@ -178,7 +178,6 @@ const OurClients = () => {
             </p>
           </div>
         </section>
-
       </div>
 
         {/* ==================== */}

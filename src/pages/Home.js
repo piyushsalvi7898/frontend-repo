@@ -161,26 +161,7 @@ const Home = () => {
 
       {/* -------------------- */}
 
-      {/* Image Scrolling Section */}
-      <div className="image-scrolling-container" ref={scrollRef}>
-        <div className="image-scroll">
-          {images.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Image ${index + 1}`}
-              className="scroll-image"
-            />
-          ))}
-        </div>
-
-        {/* Floating Bubbles */}
-        <div className="bubble">Yunify</div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-        <div className="bubble"></div>
-      </div>
+ 
 
       {/* ----------------- */}
 
@@ -234,6 +215,36 @@ const Home = () => {
           </p>
         </div>
       </section>
+
+
+
+
+     {/* Image Scrolling Section */}
+     <div className="image-scrolling-container" ref={scrollRef}>
+        <div className="image-scroll">
+          {images.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Image ${index + 1}`}
+              className="scroll-image"
+            />
+          ))}
+        </div>
+
+        {/* Floating Bubbles */}
+        <div className="bubble">Yunify</div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+      </div>
+
+
+
+
+
+
       {/* ------------------------- */}
 
       <div className="bigsection">
