@@ -11,7 +11,7 @@ const NavbarComponent = () => {
 
     return (
         <Navbar expand="lg" className="custom-navbar px-3">
-            <Container>
+            {/* <Container>
                 <Navbar.Brand as={Link} to="/">
                     <img src={myImage} alt="Logo" className="home-image2" style={{ height: '40px' }} />
                 </Navbar.Brand>
@@ -34,7 +34,13 @@ const NavbarComponent = () => {
                         <Nav.Link as={Link} className={location.pathname === "/registration-form" ? "active" : ""} to="/registration-form">Registration</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
-            </Container>
+            </Container> */}
+            {/* isko uncomment krna he bss  */}
+            <Container>
+    <div class="error-box">
+        ❌ Error: Something went wrong while loading the navbar!
+    </div>
+</Container>
         </Navbar>
     );
 };
