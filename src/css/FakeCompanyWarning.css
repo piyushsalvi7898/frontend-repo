@@ -1,0 +1,16 @@
+/* src/components/FakeCompanyWarning.css */
+
+.warning-box {
+    background: linear-gradient(135deg, #2a0000, #660000);
+    border: 2px solid #ff0000;
+    transform: rotateY(5deg) rotateX(5deg);
+    transition: transform 0.5s ease;
+    max-width: 600px;
+    perspective: 1000px;
+  }
+  
+  .warning-box:hover {
+    transform: rotateY(0deg) rotateX(0deg) scale(1.03);
+    box-shadow: 0 20px 30px rgba(255, 0, 0, 0.3);
+  }
+  

@@ -155,3 +155,13 @@ const DashboardPage = ({ isOwner }) => {
 };
 
 export default DashboardPage;
+
+
+
+
+
+
+
+
+
+// comapny me job krr rha tha vo logo ne mko 2 mhine ki slary nhi di he mujhe roj juth boll rhe aaj kll krte krte 2 mhine ho gye he  mujhe uske khilaf compalaint  he police station me jaake aavedan dena he jisme likhit me likhna he ki comapny name Yunify HR & IT Solutions.   jiska owner he yogesh bhawasar    yoges bhawasar ka contact no. 7024223240   jha phle comapny thi vha ka address 2nd floar mahakal traders  in front of subhash nagarwater tank pardeshipura indore         or ab jo company ka new address he vo he Akbar Ali Complex, 305, New Palasia, Indore, Madhya Pradesh           mujhe hire kiya tha yogesh bhavasar ne 10,000 fix salary bolke joki mujhe offer letter me bhi mention krke di gyi he mene vha 45 din kaam kiya lekin  mujhe sirf 2500 rs. diye gye or uske baad unhone office ye bolke bnd kra ki work from home kro or baad me bolte company bnd ho gyi he fir company dusri jgh shift krli jiska kuch btaya bhi nhi information bhi nhi diya     mujhe bola gya resign letter dedo usme bhi mene mention krr rkha he ki meri salary pending he 2 mhine ke upr ho gya he  or yogesh bhawasar (owner) juth pe juth bolke ghuma rha he    mujhe bolaa tha may ke phl week me salary de denge but ni di fit bola 15 may tk tb bhi nhi di fir bolta 20may tk di prr fir bhi meri salary nhi ayi he  issliye me compalint krr rha hu aapko mere pass sare proof he mene Offer letter, resgin letter or chats ke screen shot ki bhi phtot copy attach ki he or me labour complaint bhi krunga agr 20 may tk meri salary nhi aayi to               or employee ka name h jiski salary baki he Piyush salvi mob no. 7898689898  employee code 101104                 (ye esa ek written me police station me dena he isko shi tarike se bna ke do)  

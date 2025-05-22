@@ -1,5 +1,6 @@
+import React from 'react';
+import "../css/FakeCompanyWarning.css"; 
 // import React, { useEffect, useRef, useState } from "react";
-import { Container, Row, Col, Button } from 'react-bootstrap';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {
 //   faEye,
@@ -26,103 +27,96 @@ import "../css/Home.css"; // Import the CSS file
 // import bpo3 from "../assets/images/bpo3.jpg";
 // import bpo4 from "../assets/images/bpo4.jpg";
 
-// import bigimage3 from "../assets/images/bigimage3.jpg"; 
+// import bigimage3 from "../assets/images/bigimage3.jpg"; // This is correct if you are in src/pages
 
 const Home = () => {
-  // const scrollRef = useRef(null);
-  // const [counter, setCounter] = useState(998); // Initial counter value
+//   const scrollRef = useRef(null);
+//   const [counter, setCounter] = useState(998); // Initial counter value
 
-  // // Effect for scroll animation
-  // useEffect(() => {
-  //   const scrollContainer = scrollRef.current;
-  //   let scrollAmount = 0;
+//   // Effect for scroll animation
+//   useEffect(() => {
+//     const scrollContainer = scrollRef.current;
+//     let scrollAmount = 0;
 
-  //   const scrollImages = () => {
-  //     if (scrollContainer) {
-  //       scrollAmount += 1; // Adjust the speed of scrolling
-  //       scrollContainer.scrollLeft = scrollAmount;
+//     const scrollImages = () => {
+//       if (scrollContainer) {
+//         scrollAmount += 1; // Adjust the speed of scrolling
+//         scrollContainer.scrollLeft = scrollAmount;
 
-  //       // Reset scroll position to create a continuous effect
-  //       if (
-  //         scrollAmount >=
-  //         scrollContainer.scrollWidth - scrollContainer.clientWidth
-  //       ) {
-  //         scrollAmount = 0; // Reset to the start
-  //       }
-  //     }
+//         // Reset scroll position to create a continuous effect
+//         if (
+//           scrollAmount >=
+//           scrollContainer.scrollWidth - scrollContainer.clientWidth
+//         ) {
+//           scrollAmount = 0; // Reset to the start
+//         }
+//       }
 
-  //     requestAnimationFrame(scrollImages);
-  //   };
+//       requestAnimationFrame(scrollImages);
+//     };
 
-  //   scrollImages(); // Start the scrolling effect
+//     scrollImages(); // Start the scrolling effect
 
-  //   return () => {
-  //     // Cleanup function (if needed)
-  //   };
-  // }, []);
+//     return () => {
+//       // Cleanup function (if needed)
+//     };
+//   }, []);
 
-  // // Start from 998 and increase by 1 every 4 seconds
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCounter((prevCounter) => prevCounter + 1); // Increase by 1
-  //   }, 4000); // Every 4 seconds
+//   // Start from 998 and increase by 1 every 4 seconds
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setCounter((prevCounter) => prevCounter + 1); // Increase by 1
+//     }, 4000); // Every 4 seconds
 
-  //   return () => clearInterval(interval); // Cleanup on component unmount
-  // }, []);
+//     return () => clearInterval(interval); // Cleanup on component unmount
+//   }, []);
 
-  // const [commentCount, setCommentCount] = useState(254); // Start from 254
+//   const [commentCount, setCommentCount] = useState(254); // Start from 254
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCommentCount((prevCount) => prevCount + 1); // Increase by 1
-  //   }, 5000); // Every 5 seconds
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setCommentCount((prevCount) => prevCount + 1); // Increase by 1
+//     }, 5000); // Every 5 seconds
 
-  //   return () => clearInterval(interval); // Cleanup on component unmount
-  // }, []);
+//     return () => clearInterval(interval); // Cleanup on component unmount
+//   }, []);
 
-  // Array of different image paths
-  // const images = [
-  //   require("../assets/images/scroll1.jpg"),
-  //   require("../assets/images/scroll2.jpg"),
-  //   require("../assets/images/scroll3.jpg"),
-  //   require("../assets/images/scroll4.jpg"),
-  //   require("../assets/images/scroll5.jpg"),
-  //   require("../assets/images/scroll6.jpg"),
-  //   require("../assets/images/scroll7.jpg"),
-  //   require("../assets/images/scroll8.jpg"),
-  //   require("../assets/images/scroll9.jpg"),
-  //   require("../assets/images/scroll10.jpg"),
-  // ];
- 
-    const handleTryAgain = () => {
-        // Page refresh or any other action can be added here
-        window.location.reload();
-    };
-
+//   // Array of different image paths
+//   const images = [
+//     require("../assets/images/scroll1.jpg"),
+//     require("../assets/images/scroll2.jpg"),
+//     require("../assets/images/scroll3.jpg"),
+//     require("../assets/images/scroll4.jpg"),
+//     require("../assets/images/scroll5.jpg"),
+//     require("../assets/images/scroll6.jpg"),
+//     require("../assets/images/scroll7.jpg"),
+//     require("../assets/images/scroll8.jpg"),
+//     require("../assets/images/scroll9.jpg"),
+//     require("../assets/images/scroll10.jpg"),
+//   ];
 
   return (
-    <>
-  <Container className="website-down-container">
-            <Row className="justify-content-center">
-                <Col md={8} className="text-center">
-                    <h1 className="down-title">⚠️ Error: Website is Currently Down</h1>
-                    <p className="down-message">
-                        We are experiencing technical difficulties. Please try again later.
-                    </p>
-                    <div className="button-container">
-                        <Button variant="primary" onClick={handleTryAgain}>
-                            Try Again
-                        </Button>
-                        <Button variant="secondary" onClick={handleTryAgain}>
-                            Refresh Page
-                        </Button>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
+<div className="d-flex justify-content-center align-items-center min-vh-100 bg-dark text-white p-4">
+  <div className="warning-box shadow-lg p-4 rounded text-center">
+    <h2 className="mb-4 text-warning display-4">⚠️ <strong>FAKE COMPANY</strong></h2>
+    
+    <p className="fs-5">
+      This is a <strong className="text-danger" style={{ fontSize: '2rem' }}>FAKE COMPANY</strong> that does not pay its employees.
+      It suddenly disappeared from its previous location without informing anyone.
+    </p>
 
-    </>
-  );
+    <p className="mt-4 text-light fs-5">
+      Please be cautious and avoid any business dealings with this company.
+    </p>
+
+    <p className="mt-3 text-info fs-6">
+      This information is being shared in the public interest.
+    </p>
+  </div>
+</div>
+
+
+);
 };
 
 export default Home;
