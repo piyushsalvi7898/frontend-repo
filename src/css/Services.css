@@ -33,6 +33,10 @@
     text-align: center; /* Ensures centered text */
 }
 
+.service-consultant-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.4);
+}
 
 
 
